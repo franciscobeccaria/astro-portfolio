@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { Menu, Github, Linkedin } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { Github, Linkedin } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import NavSidebarComponent from "@/components/nav-sidebar"
 

@@ -2,16 +2,26 @@ import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Menu, X } from 'lucide-react'
 
-export default function NavSidebarComponent({toggleButtonClassName}) {
-  const [isOpen, setIsOpen] = useState(false)
+interface NavSidebarComponentProps {
+  toggleButtonClassName?: string;
+}
 
-  const toggleSidebar = () => setIsOpen(!isOpen)
+export default function NavSidebarComponent({ toggleButtonClassName = '' }: NavSidebarComponentProps) {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const toggleSidebar = () => setIsOpen(!isOpen);
 
   return (
     <>
-      <Button onClick={toggleSidebar} aria-label={isOpen ? "Close menu" : "Open menu"} variant="ghost" size="icon" className={toggleButtonClassName}>
-        <Menu className="h-6 w-6" />
-        <span className="sr-only">Menu</span>
+      <Button
+        onClick={toggleSidebar}
+        aria-label={isOpen ? "Close menu" : "Open menu"}
+        variant="ghost"
+        size="icon"
+        className={toggleButtonClassName}
+      >
+        {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        <span className="sr-only">{isOpen ? "Close menu" : "Open menu"}</span>
       </Button>
 
       {/* Sidebar */}

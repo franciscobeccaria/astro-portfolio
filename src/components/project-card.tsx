@@ -1,13 +1,22 @@
 import { useState } from 'react'
 import ProjectOverviewWithAnimatedModalComponent from '@/components/project-overview-with-animated-modal'
 
-export default function ProjectCard({ title, description, isMarkDown }) {
-  const [isModalOpen, setModalOpen] = useState(false)
+// Define the type for the component props
+interface ProjectCardProps {
+  title: string;
+  description: string;
+  isMarkDown: boolean;
+}
+
+export default function ProjectCard({ title, description, isMarkDown }: ProjectCardProps) {
+  // Add a type annotation for the useState hook
+  const [isModalOpen, setModalOpen] = useState<boolean>(false)
 
   return (
     <div className="bg-gray-100 p-6 rounded-lg">
-      <h3 className="text-xl font-semibold mb-2">Filmo</h3>
-      <p className="text-gray-700">A movie database application built with React and The Movie Database API.</p>
+      <h3 className="text-xl font-semibold mb-2">{title}</h3>
+      <p className="text-gray-700">{description}</p>
+      {/* Pass the prop correctly */}
       <ProjectOverviewWithAnimatedModalComponent isMarkDown={isMarkDown} />
     </div>
   )

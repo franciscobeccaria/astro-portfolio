@@ -1,3 +1,4 @@
+import type { MouseEvent } from 'react'
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from "@/components/ui/button"
@@ -6,15 +7,26 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Film, X } from "lucide-react"
 import ReactMarkdown from 'react-markdown'
 
+// Define the type for image renderer props
+interface ImageRendererProps {
+  src?: string;
+  alt?: string;
+}
+
+// Define the type for video renderer props
+interface VideoRendererProps {
+  src?: string;
+}
+
 // Custom renderer for images
-const ImageRenderer = ({ src, alt }) => (
+const ImageRenderer = ({ src, alt }: ImageRendererProps) => (
   <div className="my-4">
     <img src={src} alt={alt} className="rounded-lg h-[400px] w-[800px]" />
   </div>
 )
 
 // Custom renderer for videos
-const VideoRenderer = ({ src }) => (
+const VideoRenderer = ({ src }: VideoRendererProps) => (
   <div className="my-4">
     <video controls className="w-full rounded-lg">
       <source src={src} type="video/mp4" />
@@ -75,9 +87,14 @@ Check out this short video demonstrating the app's core functionalities:
 We're constantly working to improve Filmo and welcome feedback from our user community!
 `
 
-export default function ProjectOverviewWithAnimatedModalComponent({ isMarkDown = false }) {
+// Define the type for the component's props
+interface ProjectOverviewWithAnimatedModalComponentProps {
+  isMarkDown?: boolean;
+}
+
+export default function ProjectOverviewWithAnimatedModalComponent({ isMarkDown = false }: ProjectOverviewWithAnimatedModalComponentProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const modalRef = useRef(null)
+  const modalRef = useRef<HTMLDivElement | null>(null)
 
   const technologies = [
     { icon: "⚛️", name: "React" },
@@ -93,8 +110,8 @@ export default function ProjectOverviewWithAnimatedModalComponent({ isMarkDown =
   const shouldUseColumns = technologies.length > 4
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
         setIsModalOpen(false)
       }
     }
