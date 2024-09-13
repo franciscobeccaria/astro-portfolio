@@ -1,36 +1,94 @@
 ---
-// Component Imports
-import Counter from '../components/Counter';
-const someProps = {
-	count: 0,
-};
+// Import global styles
+import '@/styles/globals.css'
 
-// Full Astro Component Syntax:
-// https://docs.astro.build/basics/astro-components/
+// Import React components
+import Header from '@/components/header.jsx'
+import ProjectCard from '@/components/project-card.jsx'
+import ContactSection from '@/components/contact-section.jsx'
+
+// Import static data if needed
+// import projects from '@/data/projects.js'
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<style>
-			html,
-			body {
-				font-family: system-ui;
-				margin: 0;
-			}
-			body {
-				padding: 2rem;
-			}
-		</style>
-	</head>
-	<body>
-		<main>
-			<Counter {...someProps} client:visible>
-				<h1>Hello, React!</h1>
-			</Counter>
-		</main>
-	</body>
+  <head>
+    <!-- Your existing head content -->
+  </head>
+  <body>
+    <!-- Header (React component with interactivity) -->
+    <Header client:load />
+
+    <main>
+      <!-- Hero Section (Static content) -->
+      <section class="h-screen bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center text-white">
+        <div class="text-center">
+          <h1 class="text-5xl font-bold mb-4">Francisco Beccaria</h1>
+          <p class="text-xl mb-8">Frontend Developer</p>
+          <!-- ArrowDown Icon as SVG -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto animate-bounce h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+      </section>
+
+      <!-- About Section (Static content) -->
+      <section class="py-20 bg-gray-100">
+        <div class="container mx-auto px-4">
+          <h2 class="text-3xl font-bold mb-8 text-center">About Me</h2>
+          <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+            I'm a passionate frontend developer with expertise in React and Next.js. I love creating beautiful and functional user interfaces that provide great user experiences.
+          </p>
+        </div>
+      </section>
+
+      <!-- Skills Section (Static content) -->
+      <section class="py-20 bg-gray-800 text-white">
+        <div class="container mx-auto px-4">
+          <h2 class="text-3xl font-bold mb-8 text-center">Skills</h2>
+          <div class="flex justify-center space-x-8">
+            <div class="text-center">
+              <!-- Use SVG icons or compatible icons -->
+              <svg class="h-12 w-12 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <!-- Code icon SVG path -->
+              </svg>
+              <h3 class="text-xl font-semibold">Web Development</h3>
+            </div>
+            <div class="text-center">
+              <!-- Briefcase Icon -->
+              <svg class="h-12 w-12 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <!-- Briefcase icon SVG path -->
+              </svg>
+              <h3 class="text-xl font-semibold">Project Management</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+          <h2 class="text-3xl font-bold mb-8 text-center">Some Projects</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Project Card (React component) -->
+            <ProjectCard
+              isMarkDown
+              title="Filmo"
+              description="A movie database application built with React and The Movie Database API."
+              client:load
+            />
+            <ProjectCard
+              title="What If Investments"
+              description="An investment simulation tool that helps users understand the potential outcomes of different investment strategies."
+              client:load
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section (React component if it includes interactivity) -->
+      <ContactSection client:load />
+
+    </main>
+  </body>
 </html>
