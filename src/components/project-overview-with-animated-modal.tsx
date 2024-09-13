@@ -1,4 +1,4 @@
-import type { MouseEvent } from 'react'
+import type { MouseEvent as ReactMouseEvent } from 'react';
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from "@/components/ui/button"
@@ -112,18 +112,19 @@ export default function ProjectOverviewWithAnimatedModalComponent({ isMarkDown =
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-        setIsModalOpen(false)
+        setIsModalOpen(false);
       }
-    }
-
+    };
+  
     if (isModalOpen) {
-      document.addEventListener('mousedown', handleClickOutside)
+      document.addEventListener('mousedown', handleClickOutside);
     }
-
+  
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [isModalOpen])
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isModalOpen]);
+  
 
   return (
     <>

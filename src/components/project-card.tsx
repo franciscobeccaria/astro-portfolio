@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import ProjectOverviewWithAnimatedModalComponent from '@/components/project-overview-with-animated-modal'
 
 // Define the type for the component props
@@ -9,9 +8,6 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ title, description, isMarkDown }: ProjectCardProps) {
-  // Add a type annotation for the useState hook
-  const [isModalOpen, setModalOpen] = useState<boolean>(false)
-
   return (
     <div className="bg-gray-100 p-6 rounded-lg">
       <h3 className="text-xl font-semibold mb-2">{title}</h3>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Github, Linkedin } from 'lucide-react'
+import { Linkedin } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import NavSidebarComponent from "@/components/nav-sidebar"
 
@@ -21,7 +21,7 @@ export default function Header() {
         <nav className="flex items-center space-x-4">
           <a href="https://github.com" target="_blank" rel="noopener noreferrer">
             <Button variant="ghost" size="icon" className={`${isScrolled ? 'text-foreground' : 'text-primary-foreground'}`}>
-              <Github className="h-5 w-5" />
+              <Linkedin className="h-5 w-5" />
               <span className="sr-only">GitHub</span>
             </Button>
           </a>

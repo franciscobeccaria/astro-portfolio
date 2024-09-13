@@ -3,9 +3,9 @@
 import '@/styles/globals.css'
 
 // Import React components
-import Header from '@/components/header.jsx'
-import ProjectCard from '@/components/project-card.jsx'
-import ContactSection from '@/components/contact-section.jsx'
+import Header from '@/components/header'
+import ProjectCard from '@/components/project-card'
+import ContactSection from '@/components/contact-section'
 
 // Import static data if needed
 // import projects from '@/data/projects.js'
@@ -72,13 +72,14 @@ import ContactSection from '@/components/contact-section.jsx'
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Project Card (React component) -->
             <ProjectCard
-              isMarkDown
+              isMarkDown={true}
               title="Filmo"
               description="A movie database application built with React and The Movie Database API."
               client:load
             />
             <ProjectCard
               title="What If Investments"
+              isMarkDown={false}
               description="An investment simulation tool that helps users understand the potential outcomes of different investment strategies."
               client:load
             />
