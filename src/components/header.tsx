@@ -15,18 +15,18 @@ export default function Header() {
   }, [])
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-10 transition-all duration-300 ${isScrolled ? 'bg-background/80' : 'bg-transparent'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-10 transition-all duration-300 ${isScrolled ? 'bg-gray-100 shadow-md' : 'bg-transparent'}`}>
       <div className="mx-auto px-4 py-3 flex items-center justify-between">
-        <NavSidebarComponent toggleButtonClassName={isScrolled ? 'text-foreground' : 'text-primary-foreground'} />
+        <NavSidebarComponent toggleButtonClassName={isScrolled ? 'text-foreground hover:bg-slate-300' : 'text-primary-foreground'} />
         <nav className="flex items-center space-x-4">
           <a href="https://github.com" target="_blank" rel="noopener noreferrer">
-            <Button variant="ghost" size="icon" className={`${isScrolled ? 'text-foreground' : 'text-primary-foreground'}`}>
+            <Button variant="ghost" size="icon" className={`${isScrolled ? 'text-foreground hover:bg-slate-300' : 'text-primary-foreground'}`}>
               <Linkedin className="h-5 w-5" />
               <span className="sr-only">GitHub</span>
             </Button>
           </a>
           <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-            <Button variant="ghost" size="icon" className={`${isScrolled ? 'text-foreground' : 'text-primary-foreground'}`}>
+            <Button variant="ghost" size="icon" className={`${isScrolled ? 'text-foreground hover:bg-slate-300' : 'text-primary-foreground'}`}>
               <Linkedin className="h-5 w-5" />
               <span className="sr-only">LinkedIn</span>
             </Button>

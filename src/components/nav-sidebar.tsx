@@ -14,9 +14,8 @@ export default function NavSidebarComponent({ toggleButtonClassName = '' }: NavS
 
   const navLinks = [
     { id: 'hero', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'skills', label: 'Skills' },
     { id: 'projects', label: 'Projects' },
+    { id: 'about', label: 'About Me' },
     { id: 'contact', label: 'Contact' },
   ];
 
@@ -35,7 +34,7 @@ export default function NavSidebarComponent({ toggleButtonClassName = '' }: NavS
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-white transform transition-transform duration-300 ease-in-out z-50 ${
+        className={`fixed top-0 left-0 h-full w-[28rem] bg-white transform transition-transform duration-300 ease-in-out z-50 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -46,11 +45,12 @@ export default function NavSidebarComponent({ toggleButtonClassName = '' }: NavS
         >
           <X size={24} />
         </button>
-        <nav className="flex flex-col h-full pt-20 px-4">
+        <nav className="flex flex-col h-full justify-center items-center px-4">
           {navLinks.map((link) => (
-              <button
+            <button
+              key={link.id}
               onClick={() => { toggleSidebar(); scrollToSection(link.id); }}
-              className="py-2 text-lg font-medium text-gray-800 hover:text-blue-600 text-left"
+              className="py-2 text-3xl font-bold text-gray-800 hover:text-blue-600 text-center w-full"
             >
               {link.label}
             </button>          
