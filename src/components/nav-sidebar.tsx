@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Menu, X } from 'lucide-react'
+import { scrollToSection } from '@/lib/scrollToSection';
 
 interface NavSidebarComponentProps {
   toggleButtonClassName?: string;
@@ -10,6 +11,14 @@ export default function NavSidebarComponent({ toggleButtonClassName = '' }: NavS
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
+
+  const navLinks = [
+    { id: 'hero', label: 'Home' },
+    { id: 'about', label: 'About' },
+    { id: 'skills', label: 'Skills' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'contact', label: 'Contact' },
+  ];
 
   return (
     <>
@@ -38,10 +47,14 @@ export default function NavSidebarComponent({ toggleButtonClassName = '' }: NavS
           <X size={24} />
         </button>
         <nav className="flex flex-col h-full pt-20 px-4">
-          <a href="/" className="py-2 text-lg font-medium text-gray-800 hover:text-blue-600">Home</a>
-          <a href="/projects" className="py-2 text-lg font-medium text-gray-800 hover:text-blue-600">Projects</a>
-          <a href="/about" className="py-2 text-lg font-medium text-gray-800 hover:text-blue-600">About Me</a>
-          <a href="/contact" className="py-2 text-lg font-medium text-gray-800 hover:text-blue-600">Contact</a>
+          {navLinks.map((link) => (
+              <button
+              onClick={() => { toggleSidebar(); scrollToSection(link.id); }}
+              className="py-2 text-lg font-medium text-gray-800 hover:text-blue-600 text-left"
+            >
+              {link.label}
+            </button>          
+          ))}
         </nav>
       </div>
 

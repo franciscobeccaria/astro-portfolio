@@ -21,7 +21,7 @@ import ContactSection from '@/components/contact-section'
 
     <main>
       <!-- Hero Section (Static content) -->
-      <section class="h-screen bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center text-white">
+      <section id="hero" class="h-screen bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center text-white">
         <div class="text-center">
           <h1 class="text-5xl font-bold mb-4">Francisco Beccaria</h1>
           <p class="text-xl mb-8">Frontend Developer</p>
@@ -33,7 +33,7 @@ import ContactSection from '@/components/contact-section'
       </section>
 
       <!-- About Section (Static content) -->
-      <section class="py-20 bg-gray-100">
+      <section id="about" class="py-20 bg-gray-100">
         <div class="container mx-auto px-4">
           <h2 class="text-3xl font-bold mb-8 text-center">About Me</h2>
           <p class="text-lg text-gray-700 max-w-2xl mx-auto">
@@ -43,7 +43,7 @@ import ContactSection from '@/components/contact-section'
       </section>
 
       <!-- Skills Section (Static content) -->
-      <section class="py-20 bg-gray-800 text-white">
+      <section id="skills" class="py-20 bg-gray-800 text-white">
         <div class="container mx-auto px-4">
           <h2 class="text-3xl font-bold mb-8 text-center">Skills</h2>
           <div class="flex justify-center space-x-8">
@@ -66,7 +66,7 @@ import ContactSection from '@/components/contact-section'
       </section>
 
       <!-- Projects Section -->
-      <section class="py-20 bg-white">
+      <section id="projects" class="py-20 bg-white">
         <div class="container mx-auto px-4">
           <h2 class="text-3xl font-bold mb-8 text-center">Some Projects</h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -88,7 +88,7 @@ import ContactSection from '@/components/contact-section'
       </section>
 
       <!-- Contact Section (React component if it includes interactivity) -->
-      <ContactSection client:load />
+      <ContactSection id="contact" client:load />
 
     </main>
   </body>
