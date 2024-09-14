@@ -124,7 +124,32 @@ export default function ProjectOverviewWithAnimatedModalComponent({ isMarkDown =
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isModalOpen]);
-  
+
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+    };
+  }, [isModalOpen]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isModalOpen) {
+        setIsModalOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isModalOpen]);
 
   return (
     <>
@@ -143,7 +168,8 @@ export default function ProjectOverviewWithAnimatedModalComponent({ isMarkDown =
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-start justify-center p-4 overflow-y-auto"
+            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-start justify-center p-4"
+            onClick={() => setIsModalOpen(false)}
           >
             <motion.div
               ref={modalRef}
@@ -152,6 +178,7 @@ export default function ProjectOverviewWithAnimatedModalComponent({ isMarkDown =
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: "spring", damping: 15, stiffness: 100 }}
               className="relative w-full max-w-4xl my-8"
+              onClick={(e: ReactMouseEvent) => e.stopPropagation()}
             >
               <Card className="w-full max-h-[90vh] overflow-hidden">
                 <CardContent className="p-6">
@@ -167,6 +194,7 @@ export default function ProjectOverviewWithAnimatedModalComponent({ isMarkDown =
                     </div>
                     <Button variant="ghost" size="icon" onClick={() => setIsModalOpen(false)}>
                       <X className="h-6 w-6" />
+                      <span className="sr-only">Close</span>
                     </Button>
                   </motion.div>
                   
