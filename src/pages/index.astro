@@ -4,16 +4,26 @@ import '@/styles/globals.css'
 
 // Import React components
 import Header from '@/components/header'
-import ProjectCard from '@/components/project-card'
-import ContactSection from '@/components/contact-section'
+import ProjectCard from '@/components/project-card.astro'
+import AboutMe from '@/components/about-me.astro'
+
+import { LuLinkedin, LuGithub, LuHeart, LuMail } from 'react-icons/lu';
+import { FaRegFilePdf } from 'react-icons/fa6';
+
+import {Button} from "@/components/ui/button"
 
 // Import static data if needed
 // import projects from '@/data/projects.js'
+import filmoData from "@/data/projects/filmo.json"
+import whatIfInvestmentsData from "@/data/projects/what-if-investments.json"
 ---
 
 <html lang="en">
   <head>
-    <!-- Your existing head content -->
+    <title>Francisco Beccaria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   </head>
   <body>
     <!-- Header (React component with interactivity) -->
@@ -21,51 +31,73 @@ import ContactSection from '@/components/contact-section'
 
     <main>
       <!-- Hero Section (Static content) -->
-      <section id="hero" class="h-screen bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center text-white">
-        <div class="text-center">
-          <h1 class="text-5xl font-bold mb-4">Francisco Beccaria</h1>
-          <p class="text-xl mb-8">Frontend Developer</p>
-          <!-- ArrowDown Icon as SVG -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto animate-bounce h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-          </svg>
-        </div>
+      <section id="hero" class="h-screen bg-gradient-to-br from-green-400 to-blue-500 flex flex-col items-center justify-center text-white relative text-center">
+        <h1 class='font-bold text-5xl sm:text-6xl text-center text-white'>Francisco Beccaria</h1>
+        <p class='text-lg opacity-70 text-center text-white'>Frontend Developer</p>
+        <!-- ArrowDown Icon as SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="absolute bottom-8 animate-bounce h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
       </section>
 
       <!-- Projects Section -->
       <section id="projects" class="py-20 bg-white">
         <div class="container mx-auto px-4">
-          <h2 class="text-3xl font-bold mb-8 text-center">Some Projects</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Project Card (React component) -->
+          <h2 class="text-3xl font-bold mb-16 text-center">Some Projects</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <ProjectCard
-              isMarkDown={true}
-              title="Filmo"
-              description="A movie database application built with React and The Movie Database API."
-              client:load
+              {...filmoData}
             />
             <ProjectCard
-              title="What If Investments"
-              isMarkDown={false}
-              description="An investment simulation tool that helps users understand the potential outcomes of different investment strategies."
-              client:load
+              {...whatIfInvestmentsData}
             />
+            <!-- <ProjectCard
+              image="https://i.ibb.co/02zhMTR/React-App-1.png"
+              title="Vation"
+            /> -->
           </div>
         </div>
       </section>
 
       <!-- About Section (Static content) -->
-      <section id="about" class="py-20 bg-gray-100">
-        <div class="container mx-auto px-4">
-          <h2 class="text-3xl font-bold mb-8 text-center">About Me</h2>
-          <p class="text-lg text-gray-700 max-w-2xl mx-auto">
-            I'm a passionate frontend developer with expertise in React and Next.js. I love creating beautiful and functional user interfaces that provide great user experiences.
-          </p>
-        </div>
-      </section>
+      <AboutMe id="about" />
 
-      <!-- Contact Section (React component if it includes interactivity) -->
-      <ContactSection id="contact" client:load />
+      <footer class="py-6 bg-gray-100">
+        <div class="container mx-auto px-4 flex justify-between items-center text-sm text-gray-600">
+          <div>
+            <p>2024 Francisco Beccaria. All rights reserved.</p>
+            <p class="flex items-center">
+              Made with <LuHeart className="h-4 w-4 mx-1 text-red-500" /> and Astro
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <a href="mailto:fbeccaria24@gmail.com">
+              <Button variant="ghost" size="icon" className='text-foreground hover:bg-slate-300'>
+                <LuMail className="h-5 w-5" />
+                <span class="sr-only">Send Email</span>
+              </Button>
+            </a>
+            <a href="/Francisco Beccaria - Resume.pdf" target="_blank" rel="noopener noreferrer">
+              <Button variant="ghost" size="icon" className="text-foreground hover:bg-slate-300">
+                <FaRegFilePdf className="h-5 w-5" />
+                <span class="sr-only">Resume</span>
+              </Button>
+            </a>
+            <a href="https://github.com/franciscobeccaria" target="_blank" rel="noopener noreferrer">
+              <Button variant="ghost" size="icon" className='text-foreground hover:bg-slate-300'>
+                <LuGithub className="h-5 w-5" />
+                <span class="sr-only">GitHub</span>
+              </Button>
+            </a>
+            <a href="https://www.linkedin.com/in/franciscobeccaria" target="_blank" rel="noopener noreferrer">
+              <Button variant="ghost" size="icon" className="text-foreground hover:bg-slate-300">
+                <LuLinkedin className="h-5 w-5" />
+                <span class="sr-only">LinkedIn</span>
+              </Button>
+            </a>
+          </div>
+        </div>
+      </footer>
 
     </main>
   </body>

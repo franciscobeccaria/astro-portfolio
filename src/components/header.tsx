@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Linkedin } from 'lucide-react'
+import { LuGithub, LuLinkedin } from "react-icons/lu";
 import { Button } from "@/components/ui/button"
 import NavSidebarComponent from "@/components/nav-sidebar"
 
@@ -19,15 +19,15 @@ export default function Header() {
       <div className="mx-auto px-4 py-3 flex items-center justify-between">
         <NavSidebarComponent toggleButtonClassName={isScrolled ? 'text-foreground hover:bg-slate-300' : 'text-primary-foreground'} />
         <nav className="flex items-center space-x-4">
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/franciscobeccaria" target="_blank" rel="noopener noreferrer">
             <Button variant="ghost" size="icon" className={`${isScrolled ? 'text-foreground hover:bg-slate-300' : 'text-primary-foreground'}`}>
-              <Linkedin className="h-5 w-5" />
+              <LuGithub className="h-5 w-5" />
               <span className="sr-only">GitHub</span>
             </Button>
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.linkedin.com/in/franciscobeccaria" target="_blank" rel="noopener noreferrer">
             <Button variant="ghost" size="icon" className={`${isScrolled ? 'text-foreground hover:bg-slate-300' : 'text-primary-foreground'}`}>
-              <Linkedin className="h-5 w-5" />
+              <LuLinkedin className="h-5 w-5" />
               <span className="sr-only">LinkedIn</span>
             </Button>
           </a>

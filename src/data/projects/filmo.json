@@ -1,0 +1,15 @@
+{
+  "title": "Filmo",
+  "icon": "/filmo-favicon.webp",
+  "technologies": [
+    {"icon": "react", "name": "React"},
+    {"icon": "redux", "name": "Redux"},
+    {"icon": "firebase", "name": "Firebase"},
+    {"icon": "styled-components", "name": "styled-components"}
+  ],
+  "generalDescription": "On this app you can search any movie or tv show. You can sign up and create custom lists, like Best Movies Ever. Also, you can use the default lists: Want-To-See and Seen-It.",
+  "techDescription": "The Movies/TV Shows database is extracted from TheMovieDB API. The user authentication is through Firebase. And I saved the users lists on Firestore. In this project I used React, React-Router, Redux, styled-components, axios, among others technologies or libraries.",
+  "imageSrc": "/filmo.webp",
+  "siteLink": "https://filmo-55c78.web.app/",
+  "repoLink": "https://github.com/franciscobeccaria/filmo"
+}

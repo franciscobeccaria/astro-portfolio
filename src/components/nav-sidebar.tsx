@@ -16,7 +16,6 @@ export default function NavSidebarComponent({ toggleButtonClassName = '' }: NavS
     { id: 'hero', label: 'Home' },
     { id: 'projects', label: 'Projects' },
     { id: 'about', label: 'About Me' },
-    { id: 'contact', label: 'Contact' },
   ];
 
   return (
