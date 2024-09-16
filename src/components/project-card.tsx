@@ -56,7 +56,7 @@ interface Technology {
 }
 
 // Define the type for the component's props
-interface ProjectOverviewModalProps {
+interface ProjectCardProps {
   title: string;
   icon?: string;
   technologies: Technology[];
@@ -68,7 +68,7 @@ interface ProjectOverviewModalProps {
   repoLink?: string;
 }
 
-export default function ProjectOverviewModal({
+export default function ProjectCard({
   title,
   icon,
   technologies,
@@ -78,7 +78,7 @@ export default function ProjectOverviewModal({
   imageSrc,
   siteLink,
   repoLink,
-}: ProjectOverviewModalProps) {
+}: ProjectCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const modalRef = useRef<HTMLDivElement | null>(null)
 
@@ -128,14 +128,23 @@ export default function ProjectOverviewModal({
 
   return (
     <>
-      <Button 
-        size="lg" 
-        onClick={() => setIsModalOpen(true)}
-        variant="gradientSecondary"
-        className="w-full transition-all duration-300 ease-in-out transform hover:scale-105"
-      >
-        Open Project Overview
-      </Button>
+      <div onClick={() => setIsModalOpen(true)} className="relative h-52 rounded-lg overflow-hidden group cursor-pointer">
+        <img
+          src={imageSrc}
+          alt={title}
+          className="transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300 group-hover:bg-opacity-70 flex flex-col justify-end p-6">
+          <h3 className="text-xl font-semibold mb-4 text-white">{title}</h3>
+          <Button 
+            size="lg" 
+            variant="gradientSecondary"
+            className="w-full transition-all duration-300 ease-in-out transform group-hover:scale-105"
+          >
+            Open Project Overview
+          </Button>
+        </div>
+      </div>
 
       <AnimatePresence>
         {isModalOpen && (

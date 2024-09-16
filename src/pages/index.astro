@@ -4,7 +4,7 @@ import '@/styles/globals.css'
 
 // Import React components
 import Header from '@/components/header'
-import ProjectCard from '@/components/project-card.astro'
+import ProjectCard from '@/components/project-card'
 import AboutMe from '@/components/about-me.astro'
 
 import { LuLinkedin, LuGithub, LuHeart, LuMail } from 'react-icons/lu';
@@ -56,10 +56,12 @@ import whatIfInvestmentsData from "@/data/projects/what-if-investments.json"
           <h2 class="text-3xl font-bold mb-16 text-center">Some Projects</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <ProjectCard
-              data={{...filmoData}}
+              client:load
+              {...filmoData}
             />
             <ProjectCard
-              data={{...whatIfInvestmentsData}}
+              client:load
+              {...whatIfInvestmentsData}
             />
             <!-- <ProjectCard
               image="https://i.ibb.co/02zhMTR/React-App-1.png"
