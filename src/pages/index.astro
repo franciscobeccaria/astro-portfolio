@@ -46,10 +46,10 @@ import whatIfInvestmentsData from "@/data/projects/what-if-investments.json"
           <h2 class="text-3xl font-bold mb-16 text-center">Some Projects</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <ProjectCard
-              {...filmoData}
+              data={{...filmoData}}
             />
             <ProjectCard
-              {...whatIfInvestmentsData}
+              data={{...whatIfInvestmentsData}}
             />
             <!-- <ProjectCard
               image="https://i.ibb.co/02zhMTR/React-App-1.png"
