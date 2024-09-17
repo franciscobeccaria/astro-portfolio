@@ -113,8 +113,10 @@ export default function VationDescription() {
         {impactDescription}
       </ReactMarkdown>
       <div className="flex items-center justify-center flex-col p-4 mt-16">
-        <Button variant="gradientPrimary">
-          Only-Frontend Version
+        <Button asChild variant="gradientPrimary">
+          <a href="https://vation-frontend.vercel.app/" target="_blank" rel="noopener noreferrer">
+            Only-Frontend Version
+          </a>  
         </Button>
         <div>
           <p className="text-center mt-2 text-sm px-8">
