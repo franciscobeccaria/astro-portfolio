@@ -56,7 +56,12 @@ import vationData from "@/data/projects/vation.json"
       <section id="projects" class="py-20 bg-white">
         <div class="container mx-auto px-4">
           <h2 class="text-3xl font-bold mb-16 text-center">Some Projects</h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[800px] mx-auto">
+            <ProjectCard
+              client:load
+              {...vationData}
+              className="md:col-span-2"
+            ><VationDescription client:load /></ProjectCard>
             <ProjectCard
               client:load
               {...filmoData}
@@ -65,10 +70,6 @@ import vationData from "@/data/projects/vation.json"
               client:load
               {...whatIfInvestmentsData}
             />
-            <ProjectCard
-              client:load
-              {...vationData}
-            ><VationDescription client:load /></ProjectCard>
           </div>
         </div>
       </section>

@@ -70,7 +70,8 @@ interface ProjectCardProps {
   imageSrc?: string;
   siteLink?: string;
   repoLink?: string;
-  children?: ReactNode; 
+  children?: ReactNode;
+  className?: string;
 }
 
 export default function ProjectCard({
@@ -84,6 +85,7 @@ export default function ProjectCard({
   siteLink,
   repoLink,
   children,
+  className,
 }: ProjectCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement | null>(null);
@@ -133,7 +135,7 @@ export default function ProjectCard({
 
   return (
     <>
-      <div onClick={() => setIsModalOpen(true)} className="relative h-52 rounded-lg overflow-hidden group cursor-pointer">
+      <div onClick={() => setIsModalOpen(true)} className={`relative h-52 rounded-lg overflow-hidden group cursor-pointer ${className || ""}`}>
         <img
           src={imageSrc}
           alt={title}
