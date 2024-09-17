@@ -11,11 +11,13 @@ import { LuLinkedin, LuGithub, LuHeart, LuMail } from 'react-icons/lu';
 import { FaRegFilePdf } from 'react-icons/fa6';
 
 import {Button} from "@/components/ui/button"
+import VationDescription from "@/components/vation-description"
 
 // Import static data if needed
 // import projects from '@/data/projects.js'
 import filmoData from "@/data/projects/filmo.json"
 import whatIfInvestmentsData from "@/data/projects/what-if-investments.json"
+import vationData from "@/data/projects/vation.json"
 ---
 
 <html lang="en">
@@ -63,10 +65,10 @@ import whatIfInvestmentsData from "@/data/projects/what-if-investments.json"
               client:load
               {...whatIfInvestmentsData}
             />
-            <!-- <ProjectCard
-              image="https://i.ibb.co/02zhMTR/React-App-1.png"
-              title="Vation"
-            /> -->
+            <ProjectCard
+              client:load
+              {...vationData}
+            ><VationDescription client:load /></ProjectCard>
           </div>
         </div>
       </section>

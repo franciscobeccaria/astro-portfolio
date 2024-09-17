@@ -1,13 +1,13 @@
-import type { MouseEvent as ReactMouseEvent } from 'react';
+import type { MouseEvent as ReactMouseEvent, ReactNode } from 'react';
 import type { IconType } from 'react-icons';
-import { useState, useRef, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { X } from "lucide-react"
-import ReactMarkdown from 'react-markdown'
-import { SiStyledcomponents, SiNextdotjs, SiGraphql, SiTailwindcss, SiReact, SiRedux, SiFirebase } from 'react-icons/si';
+import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { X } from "lucide-react";
+import ReactMarkdown from 'react-markdown';
+import { SiStyledcomponents, SiNextdotjs, SiGraphql, SiTailwindcss, SiReact, SiRedux, SiFirebase, SiSass, SiStorybook, SiAuth0, SiSanity, SiReactquery, SiEslint } from 'react-icons/si';
 
 const iconMap: { [key: string]: IconType } = {
   "react": SiReact,
@@ -17,8 +17,12 @@ const iconMap: { [key: string]: IconType } = {
   "nextjs": SiNextdotjs,
   "graphql": SiGraphql,
   "tailwindcss": SiTailwindcss,
-  "react-native": SiReact, // Replace with appropriate icon if needed
-  // Add more mappings as needed
+  "sass": SiSass,
+  "storybook": SiStorybook,
+  "auth0": SiAuth0,
+  "sanity": SiSanity,
+  "react-query": SiReactquery,
+  "eslint": SiEslint
 };
 
 // Define the type for image renderer props
@@ -37,7 +41,7 @@ const ImageRenderer = ({ src, alt }: ImageRendererProps) => (
   <div className="my-4">
     <img src={src} alt={alt} className="rounded-lg h-[400px] w-[800px]" />
   </div>
-)
+);
 
 // Custom renderer for videos
 const VideoRenderer = ({ src }: VideoRendererProps) => (
@@ -47,7 +51,7 @@ const VideoRenderer = ({ src }: VideoRendererProps) => (
       Your browser does not support the video tag.
     </video>
   </div>
-)
+);
 
 // Define the type for the technologies prop
 interface Technology {
@@ -66,6 +70,7 @@ interface ProjectCardProps {
   imageSrc?: string;
   siteLink?: string;
   repoLink?: string;
+  children?: ReactNode; 
 }
 
 export default function ProjectCard({
@@ -78,11 +83,11 @@ export default function ProjectCard({
   imageSrc,
   siteLink,
   repoLink,
+  children,
 }: ProjectCardProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const modalRef = useRef<HTMLDivElement | null>(null)
-
-  const shouldUseColumns = technologies.length > 4
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const modalRef = useRef<HTMLDivElement | null>(null);
+  const shouldUseColumns = technologies.length > 4;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -248,7 +253,16 @@ export default function ProjectCard({
                       </div>
                     </motion.div>
                     
-                    {markdownContent ? (
+                    {children ? (
+                      <motion.div 
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.5 }}
+                        className="prose max-w-none"
+                      >
+                        {children}
+                      </motion.div>
+                    ) : markdownContent ? (
                       <motion.div 
                         initial={{ y: 20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
@@ -309,5 +323,5 @@ export default function ProjectCard({
         )}
       </AnimatePresence>
     </>
-  )
+  );
 }
