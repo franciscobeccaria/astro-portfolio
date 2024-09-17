@@ -92,7 +92,7 @@ export default function VationDescription() {
       </ReactMarkdown>
       <div className="h-[360px] sm:h-[510px]">
         <Tabs defaultValue="search">
-          <TabsList className="inline-flex w-full sm:w-auto flex-wrap justify-center sm:justify-normal space-x-4 sm:space-x-0 h-[90px] sm:h-[auto]">
+          <TabsList className="inline-flex w-full sm:w-auto flex-wrap justify-center sm:justify-normal space-x-4 sm:space-x-0 h-[120px] sm:h-[auto]">
             <TabsTrigger value="search">Advanced Search</TabsTrigger>
             <TabsTrigger value="vchat">vChat</TabsTrigger>
             <TabsTrigger value="selection">Selection</TabsTrigger>
