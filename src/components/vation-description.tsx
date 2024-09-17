@@ -46,10 +46,10 @@ I was in daily communication with the client from the US, building strong trust 
 export default function VationDescription() {
   return (
     <>
-      <ReactMarkdown>
+      <ReactMarkdown className="prose max-w-none">
         {generalDescription}
       </ReactMarkdown>
-      <ReactMarkdown>
+      <ReactMarkdown className="prose max-w-none">
         {exploreDescription}
       </ReactMarkdown>
       <div className="h-[360px] sm:h-[560px]">
@@ -68,7 +68,7 @@ export default function VationDescription() {
           <TabsContent className="mx-auto max-w-[640px]" value="companies"><img src="/vation/company.webp" /></TabsContent>
         </Tabs>
       </div>
-      <ReactMarkdown>
+      <ReactMarkdown className="prose max-w-none">
         {myResearchDescription}
       </ReactMarkdown>
       <div className="h-[360px] sm:h-[500px]">
@@ -87,7 +87,7 @@ export default function VationDescription() {
           <TabsContent className="mx-auto max-w-[640px]" value="tags"><img src="/vation/tags-zoomed.webp" /></TabsContent>
         </Tabs>
       </div>
-      <ReactMarkdown>
+      <ReactMarkdown className="prose max-w-none">
         {otherFeaturesDescription}
       </ReactMarkdown>
       <div className="h-[360px] sm:h-[510px]">
@@ -106,10 +106,10 @@ export default function VationDescription() {
           <TabsContent className="mx-auto max-w-[700px]" value="login"><img src="/vation/login.webp" /></TabsContent>
         </Tabs>
       </div>
-      <ReactMarkdown>
+      <ReactMarkdown className="prose max-w-none">
         {techDescription}
       </ReactMarkdown>
-      <ReactMarkdown>
+      <ReactMarkdown className="prose max-w-none">
         {impactDescription}
       </ReactMarkdown>
       <div className="flex items-center justify-center flex-col p-4 mt-16">
