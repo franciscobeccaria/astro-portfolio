@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { X } from "lucide-react";
 import ReactMarkdown from 'react-markdown';
-import { SiStyledcomponents, SiNextdotjs, SiGraphql, SiTailwindcss, SiReact, SiRedux, SiFirebase, SiSass, SiStorybook, SiAuth0, SiSanity, SiReactquery, SiEslint } from 'react-icons/si';
+import { SiStyledcomponents, SiNextdotjs, SiGraphql, SiTailwindcss, SiReact, SiRedux, SiFirebase, SiSass, SiStorybook, SiAuth0, SiSanity, SiReactquery, SiEslint, SiTypescript, SiNestjs, SiMongodb, SiPuppeteer } from 'react-icons/si';
 
 const iconMap: { [key: string]: IconType } = {
   "react": SiReact,
@@ -22,7 +22,11 @@ const iconMap: { [key: string]: IconType } = {
   "auth0": SiAuth0,
   "sanity": SiSanity,
   "react-query": SiReactquery,
-  "eslint": SiEslint
+  "eslint": SiEslint,
+  "typescript": SiTypescript,
+  "nestjs": SiNestjs,
+  "mongodb": SiMongodb,
+  "puppeteer": SiPuppeteer
 };
 
 // Define the type for image renderer props

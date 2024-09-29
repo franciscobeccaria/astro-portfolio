@@ -18,6 +18,7 @@ import VationDescription from "@/components/vation-description"
 import filmoData from "@/data/projects/filmo.json"
 import whatIfInvestmentsData from "@/data/projects/what-if-investments.json"
 import vationData from "@/data/projects/vation.json"
+import zapparia from "@/data/projects/zapparia.json"
 ---
 
 <html lang="en">
@@ -56,11 +57,11 @@ import vationData from "@/data/projects/vation.json"
       <section id="projects" class="py-20 bg-white">
         <div class="container mx-auto px-4">
           <h2 class="text-3xl font-bold mb-16 text-center">Some Projects</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[800px] mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[800px] mx-auto">
             <ProjectCard
               client:load
               {...vationData}
-              className="md:col-span-2"
+              className="md:col-span-3"
             ><VationDescription client:load /></ProjectCard>
             <ProjectCard
               client:load
@@ -69,6 +70,10 @@ import vationData from "@/data/projects/vation.json"
             <ProjectCard
               client:load
               {...whatIfInvestmentsData}
+            />
+            <ProjectCard
+              client:load
+              {...zapparia}
             />
           </div>
         </div>
