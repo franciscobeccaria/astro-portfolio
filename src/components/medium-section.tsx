@@ -45,7 +45,7 @@ export default function MediumSection() {
           </a>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-center gap-8 overflow-x-auto pb-4">
+        <div className="flex flex-col md:flex-row items-center md:items-start justify-center gap-8 overflow-x-auto pb-4">
           {mediumPosts.map((post) => (
             <a
               key={post.id}
