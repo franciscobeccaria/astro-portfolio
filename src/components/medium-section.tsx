@@ -45,14 +45,14 @@ export default function MediumSection() {
           </a>
         </div>
 
-        <div className="flex justify-center gap-8 overflow-x-auto pb-4">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-8 overflow-x-auto pb-4">
           {mediumPosts.map((post) => (
             <a
               key={post.id}
               href={post.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex-shrink-0 w-80"
+              className="group flex-shrink-0 md:w-80"
             >
               <article className="border-b border-border pb-4">
                 <h3 className="text-lg font-medium group-hover:text-primary transition-colors mb-2">{post.title}</h3>
