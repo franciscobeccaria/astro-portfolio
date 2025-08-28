@@ -7,8 +7,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { X } from "lucide-react";
 import ReactMarkdown from 'react-markdown';
-import { SiStyledcomponents, SiNextdotjs, SiGraphql, SiTailwindcss, SiReact, SiRedux, SiFirebase, SiSass, SiStorybook, SiAuth0, SiSanity, SiReactquery, SiEslint, SiTypescript, SiNestjs, SiMongodb, SiPuppeteer, SiGmail, SiGoogle, SiPostgresql } from 'react-icons/si';
-import { ZustandIcon, ShadcnIcon, NextAuthIcon } from './CustomIcons';
+import { SiStyledcomponents, SiNextdotjs, SiGraphql, SiTailwindcss, SiReact, SiRedux, SiFirebase, SiSass, SiStorybook, SiAuth0, SiSanity, SiReactquery, SiEslint, SiTypescript, SiNestjs, SiMongodb, SiPuppeteer, SiGmail, SiGoogle } from 'react-icons/si';
+import { ZustandIcon, ShadcnIcon } from './CustomIcons';
 import { getTranslations } from '@/i18n/utils';
 import type { Translation } from '@/i18n/types';
 

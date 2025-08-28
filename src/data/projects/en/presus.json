@@ -1,6 +1,6 @@
 {
   "title": "Presus",
-  "icon": "/presus-favicon.webp",
+  "icon": "/icons/presus.png",
   "technologies": [
     {"icon": "nextjs", "name": "NextJS"},
     {"icon": "typescript", "name": "TypeScript"},
