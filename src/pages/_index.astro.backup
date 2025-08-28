@@ -16,21 +16,15 @@ import PresusDescription from "@/components/presus-description"
 
 // Import static data if needed
 // import projects from '@/data/projects.js'
-import filmoData from "@/data/projects/en/filmo.json"
-import whatIfInvestmentsData from "@/data/projects/en/what-if-investments.json"
-import vationData from "@/data/projects/en/vation.json"
-import presusData from "@/data/projects/en/presus.json"
-import zapparia from "@/data/projects/en/zapparia.json"
+import filmoData from "@/data/projects/filmo.json"
+import whatIfInvestmentsData from "@/data/projects/what-if-investments.json"
+import vationData from "@/data/projects/vation.json"
+import presusData from "@/data/projects/presus.json"
+import zapparia from "@/data/projects/zapparia.json"
 import MediumSection from '@/components/medium-section';
-
-// Import i18n utils
-import { getTranslations, getCurrentLanguage } from '@/i18n/utils';
-
-const currentLang = getCurrentLanguage(Astro.url);
-const t = await getTranslations(currentLang);
 ---
 
-<html lang={currentLang}>
+<html lang="en">
   <head>
     <title>Francisco Beccaria</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,28 +32,24 @@ const t = await getTranslations(currentLang);
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content={`Francisco Beccaria,+3 years of experience ${t.hero.title} portfolio showcasing projects, skills, and contact information.`}>
+    <meta name="description" content="Francisco Beccaria,+3 years of experience Frontend Developer portfolio showcasing projects, skills, and contact information.">
     <meta name="keywords" content="frontend developer, web development, react.js, next.js, astro, portfolio">
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
-    <meta property="og:title" content={`Francisco Beccaria - ${t.hero.title}`} />
+    <meta property="og:title" content="Francisco Beccaria - Frontend Developer" />
     <meta property="og:description" content="Portfolio showcasing my frontend development projects and skills." />
     <meta property="og:image" content="/hero.webp" />
     <meta property="og:url" content="https://franbeccaria.com" />
-    
-    <!-- Hreflang tags for SEO -->
-    <link rel="alternate" hreflang="es" href="https://franbeccaria.com/es/" />
-    <link rel="alternate" hreflang="en" href="https://franbeccaria.com/" />
-    <link rel="alternate" hreflang="x-default" href="https://franbeccaria.com/" />
+    <html lang="en">        
   </head>
   <body>
     <!-- Header (React component with interactivity) -->
-    <Header client:load lang={currentLang} />
+    <Header client:load />
 
     <main>
       <!-- Hero Section (Static content) -->
       <section id="hero" class="h-screen bg-gradient-to-br from-green-400 to-blue-500 flex flex-col items-center justify-center text-white relative text-center">
-        <h1 class='font-bold text-4xl sm:text-6xl text-center text-white'>{t.hero.name}</h1>
-        <p class='text-lg opacity-70 text-center text-white'>{t.hero.title}</p>
+        <h1 class='font-bold text-4xl sm:text-6xl text-center text-white'>Francisco Beccaria</h1>
+        <p class='text-lg opacity-70 text-center text-white'>Frontend Developer</p>
         <!-- ArrowDown Icon as SVG -->
         <svg xmlns="http://www.w3.org/2000/svg" class="absolute bottom-8 animate-bounce h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -69,19 +59,17 @@ const t = await getTranslations(currentLang);
       <!-- Projects Section -->
       <section id="projects" class="py-20 bg-white">
         <div class="container mx-auto px-4">
-          <h2 class="text-3xl font-bold mb-16 text-center">{t.projects.title}</h2>
+          <h2 class="text-3xl font-bold mb-16 text-center">Some Projects</h2>
           <!-- Main Projects Row -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[800px] mx-auto mb-8">
             <ProjectCard
               client:load
               {...presusData}
-              lang={currentLang}
-            ><PresusDescription client:load lang={currentLang} /></ProjectCard>
+            ><PresusDescription client:load /></ProjectCard>
             <ProjectCard
               client:load
               {...vationData}
-              lang={currentLang}
-            ><VationDescription client:load lang={currentLang} /></ProjectCard>
+            ><VationDescription client:load /></ProjectCard>
           </div>
           
           <!-- Other Projects Row -->
@@ -89,65 +77,62 @@ const t = await getTranslations(currentLang);
             <ProjectCard
               client:load
               {...filmoData}
-              lang={currentLang}
             />
             <ProjectCard
               client:load
               {...whatIfInvestmentsData}
-              lang={currentLang}
             />
             <ProjectCard
               client:load
               {...zapparia}
-              lang={currentLang}
             />
           </div>
         </div>
       </section>
 
       <!-- About Section (Static content) -->
-      <AboutMe id="about" lang={currentLang} />
+      <AboutMe id="about" />
 
       {/* Medium Posts Section */}
-      <MediumSection lang={currentLang} />
+      <MediumSection />
 
       <footer class="py-6 bg-gray-100">
         <div class="container mx-auto px-4 flex flex-col-reverse gap-2 sm:flex-row justify-between items-center text-sm text-gray-600">
           <div>
-            <p>{t.footer.rights}</p>
+            <p>2025 Francisco Beccaria. All rights reserved.</p>
             <p class="flex items-center">
-              {t.footer.madeWith} <LuHeart className="h-4 w-4 mx-1 text-red-500" /> {t.footer.and}
+              Made with <LuHeart className="h-4 w-4 mx-1 text-red-500" /> and Astro
             </p>
           </div>
           <div class="flex items-center gap-2">
             <a href="mailto:fbeccaria24@gmail.com">
               <Button variant="ghost" size="icon" className='text-foreground hover:bg-slate-300'>
                 <LuMail className="h-5 w-5" />
-                <span class="sr-only">{t.footer.sendEmail}</span>
+                <span class="sr-only">Send Email</span>
               </Button>
             </a>
-            <a href={currentLang === 'es' ? "/Francisco Beccaria - CV.pdf" : "/Francisco Beccaria - Resume.pdf"} target="_blank" rel="noopener noreferrer">
+            <a href="/Francisco Beccaria - Resume.pdf" target="_blank" rel="noopener noreferrer">
               <Button variant="ghost" size="icon" className="text-foreground hover:bg-slate-300">
                 <FaRegFilePdf className="h-5 w-5" />
-                <span class="sr-only">{t.footer.resume}</span>
+                <span class="sr-only">Resume</span>
               </Button>
             </a>
             <a href="https://github.com/franciscobeccaria" target="_blank" rel="noopener noreferrer">
               <Button variant="ghost" size="icon" className='text-foreground hover:bg-slate-300'>
                 <LuGithub className="h-5 w-5" />
-                <span class="sr-only">{t.footer.github}</span>
+                <span class="sr-only">GitHub</span>
               </Button>
             </a>
             <a href="https://www.linkedin.com/in/franciscobeccaria" target="_blank" rel="noopener noreferrer">
               <Button variant="ghost" size="icon" className="text-foreground hover:bg-slate-300">
                 <LuLinkedin className="h-5 w-5" />
-                <span class="sr-only">{t.footer.linkedin}</span>
+                <span class="sr-only">LinkedIn</span>
               </Button>
             </a>
             <a href="https://medium.com/@fbeccaria24" target="_blank" rel="noopener noreferrer">
               <Button variant="ghost" size="icon" className="text-foreground hover:bg-slate-300">
                 <FaMedium className="h-5 w-5" />
-                <span class="sr-only">{t.footer.medium}</span>
+                <span class="sr-only">Medium</span>
               </Button>
             </a>
           </div>

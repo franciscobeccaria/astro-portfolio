@@ -1,0 +1,19 @@
+{
+  "title": "Presus",
+  "icon": "/presus-favicon.webp",
+  "technologies": [
+    {"icon": "nextjs", "name": "NextJS"},
+    {"icon": "typescript", "name": "TypeScript"},
+    {"icon": "tailwindcss", "name": "TailwindCSS"},
+    {"icon": "zustand", "name": "Zustand"},
+    {"icon": "shadcnui", "name": "shadcn/ui"},
+    {"icon": "auth0", "name": "NextAuth.js"},
+    {"icon": "nestjs", "name": "NestJS"},
+    {"icon": "mongodb", "name": "PostgreSQL"},
+    {"icon": "gmail", "name": "Gmail API"},
+    {"icon": "google-oauth", "name": "Google OAuth"}
+  ],
+  "generalDescription": "Budget management system with interactive dashboard, payment methods handling and transaction tracking. Allows users to create, edit and manage budgets efficiently.",
+  "techDescription": "Built with NextJS for smooth user experience, TailwindCSS for responsive design, TypeScript for strong typing and React Query for server state management and optimized caching.",
+  "imageSrc": "/presus/dashboard.webp"
+}

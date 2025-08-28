@@ -10,4 +10,11 @@ export default defineConfig({
     integrations: [react(), tailwind({
         applyBaseStyles: false,
       })],
+    i18n: {
+        defaultLocale: "en",
+        locales: ["es", "en"],
+        routing: {
+            prefixDefaultLocale: false
+        }
+    }
 });

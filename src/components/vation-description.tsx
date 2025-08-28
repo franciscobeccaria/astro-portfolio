@@ -1,56 +1,21 @@
 import ReactMarkdown from "react-markdown"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs"
 import { Button } from "./ui/button"
+import { vationContent } from "@/data/vation-content"
 
-const generalDescription = `
-### General Description
+interface VationDescriptionProps {
+  lang?: 'es' | 'en';
+}
 
-The Vation Innovation Platform connects thousands of companies working on fresh ideas and tech solutions. It makes research easier, speeds up connections across the tech world, and boosts collaboration within your team. 
-`
-
-const exploreDescription = `### Exploring the platform`
-
-const myResearchDescription = `### Exploring My Research`
-
-const otherFeaturesDescription = `### Exploring the rest of features`
-
-const techDescription = `
-### Tech Description
-
-The project was developed using **Next.js**, taking full advantage of its server-side rendering (SSR) capabilities, static site generation, and performance optimizations. I integrated **TailwindCSS** for rapid and maintainable styling.
-
-Key dependencies:
-
-* **Auth0**: Managed secure authentication and authorization.
-* **DraftJS**: Provided rich text editing features for dynamic content creation.
-* **React PDF Renderer**: Generated and displayed PDF documents directly from React components.
-* **Sanity**: Integrated a headless CMS for managing and updating dynamic content.
-* **React Query**: Handled efficient data fetching, caching, and synchronization with API endpoints.
-* **Axios**: Simplified server communication with robust HTTP client features.
-* **Lightweight Charts and Recharts**: Implemented interactive data visualizations for analyzing trends.
-* **React Hook Form**: Managed form state efficiently with validation and minimal re-renders.
-* **Sass**: Enhanced styling capabilities alongside Tailwind for complex UI elements.
-* **Storybook**: Developed and tested UI components in isolation to ensure consistency.
-`
-
-const impactDescription = `
-### Impact on the Project
-
-I led the frontend development of the Vation platform from the start, working with a dedicated frontend team and collaborating closely with the Head of Product, Project Manager, QA, backend (Ruby on Rails), and designers. I introduced Next.js and TailwindCSS, marking the **first time** these technologies were used in the company.
-
-One of my key contributions was transitioning the platform from server-side rendering to **static pages**, which significantly improved load times and performance, a change the client appreciated. I also supported the design team using Figma to ensure smooth implementation of designs.
-
-I was in daily communication with the client from the US, building strong trust with the **Head of Product** and ensuring we delivered on all goals effectively.
-`
-
-export default function VationDescription() {
+export default function VationDescription({ lang = 'es' }: VationDescriptionProps) {
+  const content = vationContent[lang];
   return (
     <>
       <ReactMarkdown className="prose max-w-none">
-        {generalDescription}
+        {content.generalDescription}
       </ReactMarkdown>
       <ReactMarkdown className="prose max-w-none">
-        {exploreDescription}
+        {content.exploreDescription}
       </ReactMarkdown>
       <div className="h-[360px] sm:h-[560px]">
         <Tabs defaultValue="explore">
@@ -69,7 +34,7 @@ export default function VationDescription() {
         </Tabs>
       </div>
       <ReactMarkdown className="prose max-w-none">
-        {myResearchDescription}
+        {content.myResearchDescription}
       </ReactMarkdown>
       <div className="h-[360px] sm:h-[500px]">
         <Tabs defaultValue="reports">
@@ -88,7 +53,7 @@ export default function VationDescription() {
         </Tabs>
       </div>
       <ReactMarkdown className="prose max-w-none">
-        {otherFeaturesDescription}
+        {content.otherFeaturesDescription}
       </ReactMarkdown>
       <div className="h-[360px] sm:h-[510px]">
         <Tabs defaultValue="search">
@@ -107,10 +72,10 @@ export default function VationDescription() {
         </Tabs>
       </div>
       <ReactMarkdown className="prose max-w-none">
-        {techDescription}
+        {content.techDescription}
       </ReactMarkdown>
       <ReactMarkdown className="prose max-w-none">
-        {impactDescription}
+        {content.impactDescription}
       </ReactMarkdown>
     </>
   )

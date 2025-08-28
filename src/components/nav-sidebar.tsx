@@ -1,21 +1,31 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import { Menu, X } from 'lucide-react'
 import { scrollToSection } from '@/lib/scrollToSection';
+import { getTranslations } from '@/i18n/utils';
+import type { Translation } from '@/i18n/types';
 
 interface NavSidebarComponentProps {
   toggleButtonClassName?: string;
+  lang: 'es' | 'en';
 }
 
-export default function NavSidebarComponent({ toggleButtonClassName = '' }: NavSidebarComponentProps) {
+export default function NavSidebarComponent({ toggleButtonClassName = '', lang }: NavSidebarComponentProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [translations, setTranslations] = useState<Translation | null>(null);
+
+  useEffect(() => {
+    getTranslations(lang).then(setTranslations);
+  }, [lang]);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
+  if (!translations) return null;
+
   const navLinks = [
-    { id: 'hero', label: 'Home' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'about', label: 'About Me' },
+    { id: 'hero', label: translations.nav.home },
+    { id: 'projects', label: translations.nav.projects },
+    { id: 'about', label: translations.nav.about },
   ];
 
   return (
@@ -40,7 +50,7 @@ export default function NavSidebarComponent({ toggleButtonClassName = '' }: NavS
         <button
           onClick={toggleSidebar}
           className="absolute top-4 right-4 p-2 text-gray-600 hover:text-gray-800 focus:outline-none"
-          aria-label="Close menu"
+          aria-label={isOpen ? "Close menu" : "Open menu"}
         >
           <X size={24} />
         </button>

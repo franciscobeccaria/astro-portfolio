@@ -1,0 +1,15 @@
+{
+  "title": "What If Investments",
+  "icon": "/what-if-investments-favicon.webp",
+  "technologies": [
+    {"icon": "react", "name": "React"},
+    {"icon": "redux", "name": "Redux"},
+    {"icon": "styled-components", "name": "styled-components"},
+    {"icon": "tailwindcss", "name": "TailwindCSS"}
+  ],
+  "generalDescription": "¡Mira qué habría pasado si hubieras comprado Apple o Bitcoin hace 10 años! Puedes probarlo con cualquier acción o crypto.",
+  "techDescription": "Usé React, Redux, styled-components y TailwindCSS. Utilicé Tradier API y Coinpaprika API.",
+  "imageSrc": "/what-if-investments.webp",
+  "siteLink": "https://what-if-investments.netlify.app/",
+  "repoLink": "https://github.com/franciscobeccaria/what-if-investment"
+}

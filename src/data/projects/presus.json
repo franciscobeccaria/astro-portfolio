@@ -1,0 +1,17 @@
+{
+  "title": "Presus",
+  "icon": "/presus-favicon.webp",
+  "technologies": [
+    {"icon": "nextjs", "name": "NextJS"},
+    {"icon": "typescript", "name": "TypeScript"},
+    {"icon": "tailwindcss", "name": "TailwindCSS"},
+    {"icon": "zustand", "name": "Zustand"},
+    {"icon": "shadcnui", "name": "shadcn/ui"},
+    {"icon": "auth0", "name": "NextAuth.js"},
+    {"icon": "nestjs", "name": "NestJS"},
+    {"icon": "mongodb", "name": "PostgreSQL"},
+    {"icon": "gmail", "name": "Gmail API"},
+    {"icon": "google-oauth", "name": "Google OAuth"}
+  ],
+  "imageSrc": "/presus/dashboard.webp"
+}

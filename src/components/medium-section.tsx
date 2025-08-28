@@ -1,24 +1,4 @@
-// Sample Medium posts data - replace with actual data
-const mediumPosts = [
-  {
-    id: 2,
-    title: "React sin caos: una estructura para pensar mejor el código",
-    description: "Si alguna vez te encontraste releyendo un componente de React con más de 300 líneas, tratando de encontrar dónde estaba esa mutation, o por qué un useEffect se dispara cuando no debería… entonces esta guía es para vos.",
-    url: "https://medium.com/@fbeccaria24/react-sin-caos-una-estructura-para-pensar-mejor-el-c%C3%B3digo-9f8e1cfeae2c",
-  },
-  {
-    id: 3,
-    title: "Cómo tener login clásico + passwordless con Auth0 en Next.js (funcionando en una misma app)",
-    description: "Una guía concreta basada en un caso real. Si ya tenes tu app Next.js funcionando con Auth0, te muestro cómo sumar login sin contraseña (passwordless) sin romper nada.",
-    url: "https://medium.com/@fbeccaria24/c%C3%B3mo-tener-login-cl%C3%A1sico-passwordless-con-auth0-en-next-js-funcionando-en-una-misma-app-285c4c05a83f",
-  },
-  {
-    id: 1,
-    title: "¿Un Cambio de Era en el Desarrollo Frontend?",
-    description: "El ecosistema de React ha sido testigo de debates y transformaciones significativas en los últimos años. Recientemente, Michael Jackson, coautor de React Router, sorprendió...",
-    url: "https://medium.com/@fbeccaria24/un-cambio-de-era-en-el-desarrollo-frontend-a059c3b3cb23",
-  },
-]
+import { mediumPosts } from '@/data/medium';
 
 // Medium icon component
 function MediumIcon() {
@@ -29,7 +9,13 @@ function MediumIcon() {
   )
 }
 
-export default function MediumSection() {
+interface MediumSectionProps {
+  lang: 'es' | 'en';
+}
+
+export default function MediumSection({ lang }: MediumSectionProps) {
+  const posts = mediumPosts[lang] || mediumPosts.es;
+
   return (
     <section className="py-12 px-4">
       <div className="max-w-6xl mx-auto">
@@ -46,7 +32,7 @@ export default function MediumSection() {
         </div>
 
         <div className="flex flex-col md:flex-row items-center md:items-start justify-center gap-8 overflow-x-auto pb-4">
-          {mediumPosts.map((post) => (
+          {posts.map((post) => (
             <a
               key={post.id}
               href={post.url}

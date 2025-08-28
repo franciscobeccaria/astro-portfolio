@@ -1,0 +1,70 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "about": "About Me"
+  },
+  "hero": {
+    "name": "Francisco Beccaria",
+    "title": "Frontend Developer"
+  },
+  "projects": {
+    "title": "Some Projects",
+    "technologies": "Technologies:",
+    "generalDescription": "General Description:",
+    "techDescription": "Tech Description:",
+    "visitSite": "Visit Site",
+    "seeRepository": "See Repository",
+    "openProjectOverview": "Open Project Overview",
+    "filmo": {
+      "generalDescription": "On this app you can search any movie or tv show. You can sign up and create custom lists, like Best Movies Ever. Also, you can use the default lists: Want-To-See and Seen-It.",
+      "techDescription": "The Movies/TV Shows database is extracted from TheMovieDB API. The user authentication is through Firebase. And I saved the users lists on Firestore. In this project I used React, React-Router, Redux, styled-components, axios, among others technologies or libraries."
+    },
+    "vation": {
+      "generalDescription": "Startup and venture capital research platform with advanced analysis and search tools.",
+      "techDescription": "Built with NextJS, TailwindCSS, Sass, Storybook, Auth0, Sanity CMS, React Query and ESLint for a robust and scalable experience."
+    },
+    "presus": {
+      "generalDescription": "Budget management system with interactive dashboard, payment methods handling and transaction tracking.",
+      "techDescription": "Built with modern technologies to provide a smooth user experience and comprehensive management tools."
+    },
+    "whatIfInvestments": {
+      "generalDescription": "Investment analysis platform with simulation tools and financial projection capabilities.",
+      "techDescription": "Web application developed for investment portfolio analysis and management."
+    },
+    "zapparia": {
+      "generalDescription": "A web app that makes shopping easier by letting users filter and browse products from different online stores, all in one simple place.",
+      "techDescription": "This app has a backend and a frontend repository. On the backend, we use NestJS with Puppeteer for scraping data, and MongoDB as the database. The app is hosted on Heroku. The frontend is built with NextJS, using TailwindCSS and shadcn/ui for the UI."
+    }
+  },
+  "about": {
+    "title": "About Me",
+    "location": "Buenos Aires, Argentina",
+    "languages": {
+      "spanish": "Spanish (Native)",
+      "english": "English (B2 Level)"
+    },
+    "description": "+4 years of experience Frontend Developer, switching between diverse projects in industries like finance, e-commerce and others. Focused on delivering product-driven solutions, collaborating closely with clients, stakeholders, and product managers using different kinds of frontend technologies.",
+    "skills": {
+      "title": "Skills:",
+      "html": "<strong>HTML:</strong> Emphasis on Semantic Markup, Accessibility, SEO",
+      "css": "<strong>CSS:</strong> Experience with TailwindCSS, Sass, BEM, Responsive Design, shadcn/ui",
+      "javascript": "<strong>JavaScript:</strong> Skilled in ReactJS, NextJS, TypeScript, Redux, Context, React Query",
+      "additional": "Additionally, I have experience working with Storybook, Firebase, Vanilla JavaScript, Ruby on Rails with StimulusJS, Shopify Themes and AstroJS."
+    },
+    "mainTechnologies": "Main Technologies:"
+  },
+  "medium": {
+    "title": "Medium"
+  },
+  "footer": {
+    "rights": "2025 Francisco Beccaria. All rights reserved.",
+    "madeWith": "Made with",
+    "and": "and Astro",
+    "sendEmail": "Send Email",
+    "resume": "Resume",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "medium": "Medium"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "title": "Vation",
+  "icon": "/vation-favicon.webp",
+  "technologies": [
+    {"icon": "nextjs", "name": "NextJS"},
+    {"icon": "tailwindcss", "name": "TailwindCSS"},
+    {"icon": "sass", "name": "Sass"},
+    {"icon": "storybook", "name": "Storybook"},
+    {"icon": "auth0", "name": "Auth0"},
+    {"icon": "sanity", "name": "Sanity CMS"},
+    {"icon": "react-query", "name": "React Query"},
+    {"icon": "eslint", "name": "ESLint"}
+  ],
+  "generalDescription": "Startup and venture capital research platform with advanced analysis and search tools. Enables investors to discover investment opportunities, analyze the market, and connect with entrepreneurs.",
+  "techDescription": "Built with NextJS for server-side rendering, TailwindCSS for styling, Sass for preprocessing, Storybook for component documentation, Auth0 for authentication, Sanity CMS for content management, React Query for state management, and ESLint for code quality.",
+  "imageSrc": "/vation/explore.webp"
+}

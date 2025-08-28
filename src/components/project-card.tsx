@@ -7,7 +7,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { X } from "lucide-react";
 import ReactMarkdown from 'react-markdown';
-import { SiStyledcomponents, SiNextdotjs, SiGraphql, SiTailwindcss, SiReact, SiRedux, SiFirebase, SiSass, SiStorybook, SiAuth0, SiSanity, SiReactquery, SiEslint, SiTypescript, SiNestjs, SiMongodb, SiPuppeteer } from 'react-icons/si';
+import { SiStyledcomponents, SiNextdotjs, SiGraphql, SiTailwindcss, SiReact, SiRedux, SiFirebase, SiSass, SiStorybook, SiAuth0, SiSanity, SiReactquery, SiEslint, SiTypescript, SiNestjs, SiMongodb, SiPuppeteer, SiGmail, SiGoogle, SiPostgresql } from 'react-icons/si';
+import { ZustandIcon, ShadcnIcon, NextAuthIcon } from './CustomIcons';
+import { getTranslations } from '@/i18n/utils';
+import type { Translation } from '@/i18n/types';
 
 const iconMap: { [key: string]: IconType } = {
   "react": SiReact,
@@ -26,7 +29,11 @@ const iconMap: { [key: string]: IconType } = {
   "typescript": SiTypescript,
   "nestjs": SiNestjs,
   "mongodb": SiMongodb,
-  "puppeteer": SiPuppeteer
+  "puppeteer": SiPuppeteer,
+  "zustand": ZustandIcon,
+  "shadcnui": ShadcnIcon,
+  "gmail": SiGmail,
+  "google-oauth": SiGoogle
 };
 
 // Define the type for image renderer props
@@ -76,6 +83,7 @@ interface ProjectCardProps {
   repoLink?: string;
   children?: ReactNode;
   className?: string;
+  lang?: 'es' | 'en';
 }
 
 export default function ProjectCard({
@@ -90,10 +98,36 @@ export default function ProjectCard({
   repoLink,
   children,
   className,
+  lang = 'es',
 }: ProjectCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [translations, setTranslations] = useState<Translation | null>(null);
   const modalRef = useRef<HTMLDivElement | null>(null);
   const shouldUseColumns = technologies.length > 4;
+
+  // Load translations
+  useEffect(() => {
+    getTranslations(lang).then(setTranslations);
+  }, [lang]);
+
+  // Get project-specific translations
+  const getProjectTranslations = () => {
+    if (!translations) return { generalDescription, techDescription };
+    
+    const projectKey = title.toLowerCase().replace(/\s+/g, '');
+    const projectTranslations = translations.projects[projectKey as keyof typeof translations.projects];
+    
+    if (projectTranslations && typeof projectTranslations === 'object') {
+      return {
+        generalDescription: projectTranslations.generalDescription || generalDescription,
+        techDescription: projectTranslations.techDescription || techDescription
+      };
+    }
+    
+    return { generalDescription, techDescription };
+  };
+
+  const { generalDescription: translatedGeneralDesc, techDescription: translatedTechDesc } = getProjectTranslations();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -152,7 +186,7 @@ export default function ProjectCard({
             variant="gradientSecondary"
             className="w-full transition-all duration-300 ease-in-out transform group-hover:scale-105"
           >
-            Open Project Overview
+            {translations?.projects.openProjectOverview || "Open Project Overview"}
           </Button>
         </div>
       </div>
@@ -208,7 +242,7 @@ export default function ProjectCard({
                       className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6"
                     >
                       <div>
-                        <h2 className="text-xl font-semibold mb-2">Technologies:</h2>
+                        <h2 className="text-xl font-semibold mb-2">{translations?.projects.technologies || "Technologies:"}</h2>
                         <ul className={`space-y-1 ${shouldUseColumns ? 'columns-2' : ''}`}>
                           {technologies.map((tech, index) => {
                             const IconComponent = iconMap[tech.icon];
@@ -237,7 +271,7 @@ export default function ProjectCard({
                           >
                             <Button variant="gradientPrimary" asChild className="w-full">
                               <a href={siteLink} target="_blank" rel="noopener noreferrer">
-                                Visit Site
+                                {translations?.projects.visitSite || "Visit Site"}
                               </a>
                             </Button>
                           </motion.div>
@@ -251,7 +285,7 @@ export default function ProjectCard({
                           >
                             <Button asChild variant="gradientSecondary" className="w-full">
                               <a href={repoLink} target="_blank" rel="noopener noreferrer">
-                                See Repository
+                                {translations?.projects.seeRepository || "See Repository"}
                               </a>
                             </Button>
                           </motion.div>
@@ -291,16 +325,16 @@ export default function ProjectCard({
                           transition={{ delay: 0.5 }}
                           className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6"
                         >
-                          {generalDescription && (
+                          {translatedGeneralDesc && (
                             <div>
-                              <h2 className="text-xl font-semibold mb-2">General Description:</h2>
-                              <p className="text-sm">{generalDescription}</p>
+                              <h2 className="text-xl font-semibold mb-2">{translations?.projects.generalDescription || "General Description:"}</h2>
+                              <p className="text-sm">{translatedGeneralDesc}</p>
                             </div>
                           )}
-                          {techDescription && (
+                          {translatedTechDesc && (
                             <div>
-                              <h2 className="text-xl font-semibold mb-2">Tech Description:</h2>
-                              <p className="text-sm">{techDescription}</p>
+                              <h2 className="text-xl font-semibold mb-2">{translations?.projects.techDescription || "Tech Description:"}</h2>
+                              <p className="text-sm">{translatedTechDesc}</p>
                             </div>
                           )}
                         </motion.div>

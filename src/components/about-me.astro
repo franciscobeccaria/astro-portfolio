@@ -1,11 +1,14 @@
 ---
 import {Badge} from "@/components/ui/badge"
+import { getTranslations, getCurrentLanguage } from '@/i18n/utils';
 
-const { id } = Astro.props;
+const { id, lang } = Astro.props;
+const currentLang = lang || getCurrentLanguage(Astro.url);
+const t = await getTranslations(currentLang);
 ---
 
 <section id={id} class="w-full py-12 md:py-24 lg:py-32 bg-gray-800 text-slate-200">
-  <h2 class="text-3xl font-bold mb-12 text-center">About Me</h2>
+  <h2 class="text-3xl font-bold mb-12 text-center">{t.about.title}</h2>
   <div class="container mx-auto grid items-center gap-8 px-4 md:px-6 lg:grid-cols-[1fr_2fr] lg:gap-16">
     <div class="flex flex-col items-center justify-center space-y-2">
       <div class='h-36 w-36 rounded-full m-4'>
@@ -13,33 +16,33 @@ const { id } = Astro.props;
       </div>
       <div class="space-y-2 text-center">
         <p class="text-muted-white">
-          <span class="font-medium">Buenos Aires, Argentina</span>
+          <span class="font-medium">{t.about.location}</span>
         </p>
         <div class="flex flex-wrap gap-2 justify-center">
-          <Badge className="bg-slate-200" variant="secondary">Spanish (Native)</Badge>
-          <Badge className="bg-slate-200" variant="secondary">English (B2 Level)</Badge>
+          <Badge className="bg-slate-200" variant="secondary">{t.about.languages.spanish}</Badge>
+          <Badge className="bg-slate-200" variant="secondary">{t.about.languages.english}</Badge>
         </div>
       </div>
     </div>
     <div class="space-y-6">
       <div class="space-y-2">
         <p>
-          +4 years of experience Frontend Developer, switching between diverse projects in industries like finance, e-commerce and others. Focused on delivering product-driven solutions, collaborating closely with clients, stakeholders, and product managers using different kinds of frontend technologies.
+          {t.about.description}
         </p>
       </div>
       <div class="space-y-2">
-        <h3 class="text-xl font-bold">Skills:</h3>
+        <h3 class="text-xl font-bold">{t.about.skills.title}</h3>
         <ul class="ml-4 flex flex-col gap-1">
-          <li><strong>HTML:</strong> Emphasis on Semantic Markup, Accessibility, SEO</li>
-          <li><strong>CSS:</strong> Experience with TailwindCSS, Sass, BEM, Responsive Design, shadcn/ui</li>
-          <li><strong>JavaScript:</strong> Skilled in ReactJS, NextJS, TypeScript, Redux, Context, React Query</li>
+          <li set:html={t.about.skills.html}></li>
+          <li set:html={t.about.skills.css}></li>
+          <li set:html={t.about.skills.javascript}></li>
         </ul>
         <p>
-          Additionally, I have experience working with Storybook, Firebase, Vanilla JavaScript, Ruby on Rails with StimulusJS, Shopify Themes and AstroJS.
+          {t.about.skills.additional}
         </p>
       </div>
       <div class="space-y-2">
-        <h3 class="text-xl font-bold">Main Technologies:</h3>
+        <h3 class="text-xl font-bold">{t.about.mainTechnologies}</h3>
         <div class="flex flex-wrap gap-2">
           <Badge className="bg-slate-200" variant="secondary">JavaScript</Badge>
           <Badge className="bg-slate-200" variant="secondary">ReactJS</Badge>

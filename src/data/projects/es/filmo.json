@@ -1,0 +1,15 @@
+{
+  "title": "Filmo",
+  "icon": "/filmo-favicon.webp",
+  "technologies": [
+    {"icon": "react", "name": "React"},
+    {"icon": "redux", "name": "Redux"},
+    {"icon": "firebase", "name": "Firebase"},
+    {"icon": "styled-components", "name": "styled-components"}
+  ],
+  "generalDescription": "En esta app puedes buscar cualquier película o serie de TV. Puedes registrarte y crear listas personalizadas, como Mejores Películas de Siempre. También puedes usar las listas predeterminadas: Quiero Ver y Ya la Vi.",
+  "techDescription": "La base de datos de películas/series de TV se extrae de la API TheMovieDB. La autenticación de usuarios es a través de Firebase. Y guardé las listas de usuarios en Firestore. En este proyecto usé React, React-Router, Redux, styled-components, axios, entre otras tecnologías o librerías.",
+  "imageSrc": "/filmo.webp",
+  "siteLink": "https://filmo-55c78.web.app/",
+  "repoLink": "https://github.com/franciscobeccaria/filmo"
+}

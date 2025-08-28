@@ -1,0 +1,19 @@
+{
+  "title": "Presus",
+  "icon": "/presus-favicon.webp",
+  "technologies": [
+    {"icon": "nextjs", "name": "NextJS"},
+    {"icon": "typescript", "name": "TypeScript"},
+    {"icon": "tailwindcss", "name": "TailwindCSS"},
+    {"icon": "zustand", "name": "Zustand"},
+    {"icon": "shadcnui", "name": "shadcn/ui"},
+    {"icon": "auth0", "name": "NextAuth.js"},
+    {"icon": "nestjs", "name": "NestJS"},
+    {"icon": "mongodb", "name": "PostgreSQL"},
+    {"icon": "gmail", "name": "Gmail API"},
+    {"icon": "google-oauth", "name": "Google OAuth"}
+  ],
+  "generalDescription": "Sistema de gestión de presupuestos con dashboard interactivo, manejo de medios de pago y seguimiento de transacciones. Permite a los usuarios crear, editar y gestionar presupuestos de manera eficiente.",
+  "techDescription": "Construido con NextJS para una experiencia de usuario fluida, TailwindCSS para diseño responsivo, TypeScript para tipado fuerte y React Query para gestión del estado del servidor y caché optimizado.",
+  "imageSrc": "/presus/dashboard.webp"
+}

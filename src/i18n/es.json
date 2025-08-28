@@ -1,0 +1,70 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "projects": "Proyectos",
+    "about": "Acerca de mí"
+  },
+  "hero": {
+    "name": "Francisco Beccaria",
+    "title": "Desarrollador Frontend"
+  },
+  "projects": {
+    "title": "Algunos Proyectos",
+    "technologies": "Tecnologías:",
+    "generalDescription": "Descripción General:",
+    "techDescription": "Descripción Técnica:",
+    "visitSite": "Visitar Sitio",
+    "seeRepository": "Ver Repositorio",
+    "openProjectOverview": "Ver Proyecto",
+    "filmo": {
+      "generalDescription": "En esta app puedes buscar cualquier película o serie de TV. Puedes registrarte y crear listas personalizadas, como Mejores Películas de Siempre. También puedes usar las listas predeterminadas: Quiero Ver y Ya la Vi.",
+      "techDescription": "La base de datos de películas/series de TV se extrae de la API TheMovieDB. La autenticación de usuarios es a través de Firebase. Y guardé las listas de usuarios en Firestore. En este proyecto usé React, React-Router, Redux, styled-components, axios, entre otras tecnologías o librerías."
+    },
+    "vation": {
+      "generalDescription": "Plataforma de investigación de startups y venture capital con herramientas avanzadas de análisis y búsqueda.",
+      "techDescription": "Desarrollado con NextJS, TailwindCSS, Sass, Storybook, Auth0, Sanity CMS, React Query y ESLint para una experiencia robusta y escalable."
+    },
+    "presus": {
+      "generalDescription": "Sistema de gestión de presupuestos con dashboard interactivo, manejo de medios de pago y seguimiento de transacciones.",
+      "techDescription": "Construido con tecnologías modernas para ofrecer una experiencia de usuario fluida y herramientas de gestión completas."
+    },
+    "whatIfInvestments": {
+      "generalDescription": "Plataforma de análisis de inversiones con herramientas de simulación y proyección financiera.",
+      "techDescription": "Aplicación web desarrollada para análisis y gestión de portafolios de inversión."
+    },
+    "zapparia": {
+      "generalDescription": "Una aplicación web que facilita las compras permitiendo a los usuarios filtrar y navegar productos de diferentes tiendas online, todo en un lugar simple.",
+      "techDescription": "Esta aplicación tiene un repositorio backend y frontend. En el backend, usamos NestJS con Puppeteer para scraping de datos, y MongoDB como base de datos. La app está alojada en Heroku. El frontend está construido con NextJS, usando TailwindCSS y shadcn/ui para la UI."
+    }
+  },
+  "about": {
+    "title": "Acerca de mí",
+    "location": "Buenos Aires, Argentina",
+    "languages": {
+      "spanish": "Español (Nativo)",
+      "english": "Inglés (Nivel B2)"
+    },
+    "description": "+4 años de experiencia como Desarrollador Frontend, alternando entre proyectos diversos en industrias como finanzas, e-commerce y otras. Enfocado en entregar soluciones orientadas al producto, colaborando estrechamente con clientes, stakeholders y product managers usando diferentes tipos de tecnologías frontend.",
+    "skills": {
+      "title": "Habilidades:",
+      "html": "<strong>HTML:</strong> Énfasis en Marcado Semántico, Accesibilidad, SEO",
+      "css": "<strong>CSS:</strong> Experiencia con TailwindCSS, Sass, BEM, Diseño Responsivo, shadcn/ui",
+      "javascript": "<strong>JavaScript:</strong> Habilidoso en ReactJS, NextJS, TypeScript, Redux, Context, React Query",
+      "additional": "Además, tengo experiencia trabajando con Storybook, Firebase, Vanilla JavaScript, Ruby on Rails con StimulusJS, Shopify Themes y AstroJS."
+    },
+    "mainTechnologies": "Tecnologías Principales:"
+  },
+  "medium": {
+    "title": "Medium"
+  },
+  "footer": {
+    "rights": "2025 Francisco Beccaria. Todos los derechos reservados.",
+    "madeWith": "Hecho con",
+    "and": "y Astro",
+    "sendEmail": "Enviar Email",
+    "resume": "Currículum",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "medium": "Medium"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "title": "Zapparia",
+  "icon": "/zapparia-favicon.webp",
+  "technologies": [
+    {"icon": "nextjs", "name": "NextJS"},
+    {"icon": "tailwindcss", "name": "TailwindCSS"},
+    {"icon": "typescript", "name": "TypeScript"},
+    {"icon": "nestjs", "name": "NestJS"},
+    {"icon": "mongodb", "name": "MongoDB"},
+    {"icon": "puppeteer", "name": "Puppeteer"}
+  ],
+  "generalDescription": "Una aplicación web que facilita las compras permitiendo a los usuarios filtrar y navegar productos de diferentes tiendas online, todo en un lugar simple.",
+  "techDescription": "Esta aplicación tiene un repositorio backend y frontend. En el backend, usamos NestJS con Puppeteer para scraping de datos, y MongoDB como base de datos. La app está alojada en Heroku. El frontend está construido con NextJS, usando TailwindCSS y shadcn/ui para la UI.",
+  "imageSrc": "/zapparia.webp",
+  "siteLink": "https://zapparia.vercel.app/"
+}
