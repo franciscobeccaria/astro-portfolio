@@ -116,12 +116,19 @@ export default function ProjectCard({
     getTranslations(lang).then(setTranslations);
   }, [lang]);
 
-  // Auto-open modal if autoOpen prop is true
+  // Auto-open modal if autoOpen prop is true, or if navigated from client-side
   useEffect(() => {
     if (autoOpen) {
       setIsModalOpen(true);
+    } else {
+      // Check if we should open modal from client-side navigation
+      const shouldOpenFromNavigation = sessionStorage.getItem('clientNavigatedTo');
+      if (shouldOpenFromNavigation === projectSlug && projectSlug) {
+        setIsModalOpen(true);
+        sessionStorage.removeItem('clientNavigatedTo');
+      }
     }
-  }, [autoOpen]);
+  }, [autoOpen, projectSlug]);
 
   // Handle browser back/forward buttons
   useEffect(() => {
@@ -203,14 +210,21 @@ export default function ProjectCard({
   }, [isModalOpen]);
 
   const handleCardClick = () => {
-    // If we're already on a project page, just open the modal
     if (autoOpen) {
+      // If we're already on a project page, just open the modal
       setIsModalOpen(true);
     } else {
-      // If we're on the main page, navigate to the project page
+      // If we're on the main page, use client-side navigation for smooth UX
       if (projectSlug) {
+        // Store flag for the target page to know it should open modal
+        sessionStorage.setItem('clientNavigatedTo', projectSlug);
         const newPath = lang === 'es' ? `/es/${projectSlug}` : `/${projectSlug}`;
-        window.location.href = newPath;
+        
+        // Use client-side navigation
+        window.history.pushState({}, '', newPath);
+        
+        // Trigger modal open immediately for current page
+        setIsModalOpen(true);
       }
     }
   };
@@ -218,11 +232,12 @@ export default function ProjectCard({
   const handleModalClose = () => {
     setIsModalOpen(false);
     
-    // If we're on a project page, navigate back to main page
-    if (autoOpen) {
-      const basePath = lang === 'es' ? '/es/' : '/';
-      window.location.href = basePath;
-    }
+    // Navigate back to main page URL using client-side navigation
+    const basePath = lang === 'es' ? '/es/' : '/';
+    window.history.pushState({}, '', basePath);
+    
+    // Clear any navigation flags
+    sessionStorage.removeItem('clientNavigatedTo');
   };
 
   return (
