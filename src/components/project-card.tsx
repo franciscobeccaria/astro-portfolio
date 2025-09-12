@@ -1,6 +1,13 @@
 import type { MouseEvent as ReactMouseEvent, ReactNode } from 'react';
 import type { IconType } from 'react-icons';
 import { useState, useRef, useEffect } from 'react';
+
+// Extend Window interface for our global variable
+declare global {
+  interface Window {
+    shouldOpenModal?: string | null;
+  }
+}
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -117,7 +124,14 @@ export default function ProjectCard({
     const currentPath = window.location.pathname;
     const expectedPath = lang === 'es' ? `/es/${projectSlug}` : `/${projectSlug}`;
     
-    if (currentPath === expectedPath && projectSlug) {
+    // Check if this modal should open automatically (from direct URL access)
+    if (window.shouldOpenModal === projectSlug && projectSlug) {
+      setIsModalOpen(true);
+      // Clear the flag so it doesn't interfere with other interactions
+      window.shouldOpenModal = null;
+    }
+    // Fallback: check URL pattern (for client-side navigation)
+    else if (currentPath === expectedPath && projectSlug) {
       setIsModalOpen(true);
     }
   }, [lang, projectSlug]);
