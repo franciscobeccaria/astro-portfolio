@@ -84,7 +84,6 @@ interface ProjectCardProps {
   children?: ReactNode;
   className?: string;
   lang?: 'es' | 'en';
-  useDirectLinks?: boolean;
   projectSlug?: string;
 }
 
@@ -101,7 +100,6 @@ export default function ProjectCard({
   children,
   className,
   lang = 'es',
-  useDirectLinks = false,
   projectSlug,
 }: ProjectCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -113,6 +111,37 @@ export default function ProjectCard({
   useEffect(() => {
     getTranslations(lang).then(setTranslations);
   }, [lang]);
+
+  // Check URL on mount to open modal if needed
+  useEffect(() => {
+    const currentPath = window.location.pathname;
+    const expectedPath = lang === 'es' ? `/es/${projectSlug}` : `/${projectSlug}`;
+    
+    if (currentPath === expectedPath && projectSlug) {
+      setIsModalOpen(true);
+    }
+  }, [lang, projectSlug]);
+
+  // Handle browser back/forward buttons
+  useEffect(() => {
+    const handlePopState = () => {
+      const currentPath = window.location.pathname;
+      const expectedPath = lang === 'es' ? `/es/${projectSlug}` : `/${projectSlug}`;
+      const basePath = lang === 'es' ? '/es/' : '/';
+      
+      if (currentPath === expectedPath && projectSlug) {
+        setIsModalOpen(true);
+      } else if (currentPath === basePath || currentPath === basePath.slice(0, -1)) {
+        setIsModalOpen(false);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [lang, projectSlug]);
 
   // Get project-specific translations
   const getProjectTranslations = () => {
@@ -136,7 +165,7 @@ export default function ProjectCard({
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-        setIsModalOpen(false);
+        handleModalClose();
       }
     };
   
@@ -164,7 +193,7 @@ export default function ProjectCard({
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && isModalOpen) {
-        setIsModalOpen(false);
+        handleModalClose();
       }
     };
 
@@ -176,12 +205,21 @@ export default function ProjectCard({
   }, [isModalOpen]);
 
   const handleCardClick = () => {
-    if (useDirectLinks && projectSlug) {
-      const langPrefix = lang === 'es' ? '/es' : '';
-      window.location.href = `${langPrefix}/${projectSlug}`;
-    } else {
-      setIsModalOpen(true);
+    setIsModalOpen(true);
+    
+    // Update URL without page refresh
+    if (projectSlug) {
+      const newPath = lang === 'es' ? `/es/${projectSlug}` : `/${projectSlug}`;
+      window.history.pushState({}, '', newPath);
     }
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    
+    // Return to main page URL
+    const basePath = lang === 'es' ? '/es/' : '/';
+    window.history.pushState({}, '', basePath);
   };
 
   return (
@@ -199,10 +237,7 @@ export default function ProjectCard({
             variant="gradientSecondary"
             className="w-full transition-all duration-300 ease-in-out transform group-hover:scale-105"
           >
-            {useDirectLinks 
-              ? (translations?.projects.visitSite || "View Project")
-              : (translations?.projects.openProjectOverview || "Open Project Overview")
-            }
+            {translations?.projects.openProjectOverview || "Open Project Overview"}
           </Button>
         </div>
       </div>
@@ -215,7 +250,7 @@ export default function ProjectCard({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-start justify-center p-4"
-            onClick={() => setIsModalOpen(false)}
+            onClick={handleModalClose}
           >
             <motion.div
               ref={modalRef}
@@ -244,7 +279,7 @@ export default function ProjectCard({
                       )}
                       <h1 className="text-4xl font-bold">{title}</h1>
                     </div>
-                    <Button variant="ghost" size="icon" onClick={() => setIsModalOpen(false)}>
+                    <Button variant="ghost" size="icon" onClick={handleModalClose}>
                       <X className="h-6 w-6" />
                       <span className="sr-only">Close</span>
                     </Button>

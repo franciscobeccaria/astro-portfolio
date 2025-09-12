@@ -2,7 +2,7 @@
 import '@/styles/globals.css'
 import Header from '@/components/header'
 import { Button } from '@/components/ui/button'
-import { LuHouse, LuArrowLeft, LuSearch } from 'react-icons/lu'
+import { LuHouse, LuArrowLeft } from 'react-icons/lu'
 import { getTranslations, getCurrentLanguage } from '@/i18n/utils'
 
 const currentLang = getCurrentLanguage(Astro.url)
@@ -17,7 +17,7 @@ const t = await getTranslations(currentLang)
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content={t.errors?.pageNotFoundDescription || "The page you're looking for doesn't exist. Return to Francisco Beccaria's portfolio."}>
+    <meta name="description" content={t.errors?.pageNotFoundDescription || "The page you're looking for doesn't exist."}>
     <meta name="robots" content="noindex">
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
   </head>
@@ -40,39 +40,11 @@ const t = await getTranslations(currentLang)
         
         <p class="text-gray-600 mb-8 leading-relaxed">
           {t.errors?.pageNotFoundDescription || 
-          "Sorry, the page you're looking for doesn't exist. It might have been moved, deleted, or you entered the wrong URL."}
+          "Sorry, the page you're looking for doesn't exist."}
         </p>
 
-        <!-- Suggested Projects -->
-        <div class="bg-white rounded-lg p-6 mb-8 shadow-sm">
-          <h2 class="text-lg font-semibold mb-4 flex items-center justify-center">
-            <LuSearch className="h-5 w-5 mr-2" />
-            {t.errors?.suggestedProjects || 'Check out these projects:'}
-          </h2>
-          <div class="space-y-2">
-            <a 
-              href={currentLang === 'es' ? '/es/presus' : '/presus'} 
-              class="block text-blue-600 hover:text-blue-800 hover:underline"
-            >
-              Presus - Budget Management System
-            </a>
-            <a 
-              href={currentLang === 'es' ? '/es/vation' : '/vation'} 
-              class="block text-blue-600 hover:text-blue-800 hover:underline"
-            >
-              Vation - Venture Capital Platform
-            </a>
-            <a 
-              href={currentLang === 'es' ? '/es/filmo' : '/filmo'} 
-              class="block text-blue-600 hover:text-blue-800 hover:underline"
-            >
-              Filmo - Movie Database
-            </a>
-          </div>
-        </div>
-
         <!-- Action Buttons -->
-        <div class="space-y-3 sm:space-y-0 sm:space-x-4 sm:flex">
+        <div class="space-y-3 sm:space-y-0 sm:space-x-4 sm:flex justify-center">
           <Button size="lg" asChild className="w-full sm:w-auto">
             <a href={currentLang === 'es' ? '/es/' : '/'} class="inline-flex items-center justify-center">
               <LuHouse className="h-4 w-4 mr-2" />
@@ -87,31 +59,7 @@ const t = await getTranslations(currentLang)
             </a>
           </Button>
         </div>
-
-        <!-- Language Switch Suggestion -->
-        <div class="mt-8 p-4 bg-blue-50 rounded-lg">
-          <p class="text-sm text-blue-800 mb-2">
-            {currentLang === 'es' 
-              ? '¿Estabas buscando el contenido en inglés?' 
-              : 'Looking for content in Spanish?'}
-          </p>
-          <a 
-            href={currentLang === 'es' ? '/' : '/es/'} 
-            class="text-blue-600 hover:text-blue-800 underline font-medium"
-          >
-            {currentLang === 'es' 
-              ? 'Switch to English' 
-              : 'Cambiar a Español'}
-          </a>
-        </div>
       </div>
     </main>
-
-    <!-- Footer -->
-    <footer class="py-6 bg-white border-t">
-      <div class="container mx-auto px-4 text-center text-sm text-gray-600">
-        <p>&copy; 2024 Francisco Beccaria. {t.footer?.rights || 'All rights reserved.'}</p>
-      </div>
-    </footer>
   </body>
 </html>
