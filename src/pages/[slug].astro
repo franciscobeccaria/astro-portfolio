@@ -1,5 +1,12 @@
 ---
+// Import global styles
+import '@/styles/globals.css'
+
 import { PROJECT_SLUGS, isValidSlug } from '@/utils/projects'
+import MainPageContent from '@/components/MainPageContent.astro';
+
+// Import i18n utils
+import { getTranslations, getCurrentLanguage } from '@/i18n/utils';
 
 export async function getStaticPaths() {
   return PROJECT_SLUGS.map(slug => ({
@@ -13,19 +20,50 @@ const { slug } = Astro.params
 if (!slug || !isValidSlug(slug)) {
   return Astro.redirect('/404')
 }
+
+const currentLang = getCurrentLanguage(Astro.url);
+const t = await getTranslations(currentLang);
+
+// Import project data for SEO
+import filmoDataEn from "@/data/projects/en/filmo.json"
+import whatIfInvestmentsDataEn from "@/data/projects/en/what-if-investments.json"
+import vationDataEn from "@/data/projects/en/vation.json"
+import presusDataEn from "@/data/projects/en/presus.json"
+import zappariaDataEn from "@/data/projects/en/zapparia.json"
+
+const projectDataMap: Record<string, any> = {
+  'filmo': filmoDataEn,
+  'what-if-investments': whatIfInvestmentsDataEn,
+  'vation': vationDataEn,
+  'presus': presusDataEn,
+  'zapparia': zappariaDataEn,
+};
+
+const projectData = projectDataMap[slug!] || null;
 ---
 
-<html>
+<html lang={currentLang}>
   <head>
-    <script define:vars={{ projectSlug: slug }}>
-      // Set flag in sessionStorage for modal to open automatically, then redirect to main page
-      sessionStorage.setItem('shouldOpenModal', projectSlug);
-      window.location.replace('/');
-    </script>
+    <title>{projectData?.title ? `${projectData.title} - Francisco Beccaria` : 'Francisco Beccaria'}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content={projectData?.generalDescription || `Francisco Beccaria,+3 years of experience ${t.hero.title} portfolio showcasing projects, skills, and contact information.`}>
+    <meta name="keywords" content="frontend developer, web development, react.js, next.js, astro, portfolio">
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <meta property="og:title" content={projectData?.title ? `${projectData.title} - Francisco Beccaria` : `Francisco Beccaria - ${t.hero.title}`} />
+    <meta property="og:description" content={projectData?.generalDescription || "Portfolio showcasing my frontend development projects and skills."} />
+    <meta property="og:image" content={projectData?.imageSrc || "/hero.webp"} />
+    <meta property="og:url" content={`https://franbeccaria.com/${slug}`} />
+    
+    <!-- Hreflang tags for SEO -->
+    <link rel="alternate" hreflang="es" href={`https://franbeccaria.com/es/${slug}`} />
+    <link rel="alternate" hreflang="en" href={`https://franbeccaria.com/${slug}`} />
+    <link rel="alternate" hreflang="x-default" href={`https://franbeccaria.com/${slug}`} />
   </head>
   <body>
-    <noscript>
-      <meta http-equiv="refresh" content="0; url=/">
-    </noscript>
+    <MainPageContent lang={currentLang} autoOpenProject={slug} />
   </body>
 </html>

@@ -87,6 +87,7 @@ interface ProjectCardProps {
   className?: string;
   lang?: 'es' | 'en';
   projectSlug?: string;
+  autoOpen?: boolean;
 }
 
 export default function ProjectCard({
@@ -103,6 +104,7 @@ export default function ProjectCard({
   className,
   lang = 'es',
   projectSlug,
+  autoOpen = false,
 }: ProjectCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [translations, setTranslations] = useState<Translation | null>(null);
@@ -114,34 +116,20 @@ export default function ProjectCard({
     getTranslations(lang).then(setTranslations);
   }, [lang]);
 
-  // Check URL on mount to open modal if needed
+  // Auto-open modal if autoOpen prop is true
   useEffect(() => {
-    const currentPath = window.location.pathname;
-    const expectedPath = lang === 'es' ? `/es/${projectSlug}` : `/${projectSlug}`;
-    
-    // Check if this modal should open automatically (from direct URL access via sessionStorage)
-    const shouldOpenModal = sessionStorage.getItem('shouldOpenModal');
-    if (shouldOpenModal === projectSlug && projectSlug) {
-      setIsModalOpen(true);
-      // Clear the flag so it doesn't interfere with other interactions
-      sessionStorage.removeItem('shouldOpenModal');
-    }
-    // Fallback: check URL pattern (for client-side navigation)
-    else if (currentPath === expectedPath && projectSlug) {
+    if (autoOpen) {
       setIsModalOpen(true);
     }
-  }, [lang, projectSlug]);
+  }, [autoOpen]);
 
   // Handle browser back/forward buttons
   useEffect(() => {
     const handlePopState = () => {
       const currentPath = window.location.pathname;
-      const expectedPath = lang === 'es' ? `/es/${projectSlug}` : `/${projectSlug}`;
       const basePath = lang === 'es' ? '/es/' : '/';
       
-      if (currentPath === expectedPath && projectSlug) {
-        setIsModalOpen(true);
-      } else if (currentPath === basePath || currentPath === basePath.slice(0, -1)) {
+      if (currentPath === basePath || currentPath === basePath.slice(0, -1)) {
         setIsModalOpen(false);
       }
     };
@@ -151,7 +139,7 @@ export default function ProjectCard({
     return () => {
       window.removeEventListener('popstate', handlePopState);
     };
-  }, [lang, projectSlug]);
+  }, [lang]);
 
   // Get project-specific translations
   const getProjectTranslations = () => {
@@ -215,21 +203,26 @@ export default function ProjectCard({
   }, [isModalOpen]);
 
   const handleCardClick = () => {
-    setIsModalOpen(true);
-    
-    // Update URL without page refresh
-    if (projectSlug) {
-      const newPath = lang === 'es' ? `/es/${projectSlug}` : `/${projectSlug}`;
-      window.history.pushState({}, '', newPath);
+    // If we're already on a project page, just open the modal
+    if (autoOpen) {
+      setIsModalOpen(true);
+    } else {
+      // If we're on the main page, navigate to the project page
+      if (projectSlug) {
+        const newPath = lang === 'es' ? `/es/${projectSlug}` : `/${projectSlug}`;
+        window.location.href = newPath;
+      }
     }
   };
 
   const handleModalClose = () => {
     setIsModalOpen(false);
     
-    // Return to main page URL
-    const basePath = lang === 'es' ? '/es/' : '/';
-    window.history.pushState({}, '', basePath);
+    // If we're on a project page, navigate back to main page
+    if (autoOpen) {
+      const basePath = lang === 'es' ? '/es/' : '/';
+      window.location.href = basePath;
+    }
   };
 
   return (

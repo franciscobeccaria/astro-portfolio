@@ -1,0 +1,160 @@
+---
+// Import React components
+import Header from '@/components/header'
+import ProjectCard from '@/components/project-card'
+import AboutMe from '@/components/about-me.astro'
+
+import { LuLinkedin, LuGithub, LuHeart, LuMail } from 'react-icons/lu';
+import { FaRegFilePdf, FaMedium } from 'react-icons/fa6';
+
+import {Button} from "@/components/ui/button"
+import VationDescription from "@/components/vation-description"
+import PresusDescription from "@/components/presus-description"
+
+// Import static data
+import filmoData from "@/data/projects/en/filmo.json"
+import whatIfInvestmentsData from "@/data/projects/en/what-if-investments.json"
+import vationData from "@/data/projects/en/vation.json"
+import presusData from "@/data/projects/en/presus.json"
+import zapparia from "@/data/projects/en/zapparia.json"
+
+// Import Spanish project data
+import filmoDataEs from "@/data/projects/es/filmo.json"
+import whatIfInvestmentsDataEs from "@/data/projects/es/what-if-investments.json"
+import vationDataEs from "@/data/projects/es/vation.json"
+import presusDataEs from "@/data/projects/es/presus.json"
+import zappariaEs from "@/data/projects/es/zapparia.json"
+
+import MediumSection from '@/components/medium-section';
+
+// Import i18n utils
+import { getTranslations, getCurrentLanguage } from '@/i18n/utils';
+
+interface Props {
+  lang: 'es' | 'en';
+  autoOpenProject?: string;
+}
+
+const { lang, autoOpenProject } = Astro.props;
+const t = await getTranslations(lang);
+
+// Get language-specific data
+const filmoDataLocal = lang === 'es' ? filmoDataEs : filmoData;
+const whatIfInvestmentsDataLocal = lang === 'es' ? whatIfInvestmentsDataEs : whatIfInvestmentsData;
+const vationDataLocal = lang === 'es' ? vationDataEs : vationData;
+const presusDataLocal = lang === 'es' ? presusDataEs : presusData;
+const zappariaLocal = lang === 'es' ? zappariaEs : zapparia;
+---
+
+<!-- Header (React component with interactivity) -->
+<Header client:load lang={lang} />
+
+<main>
+  <!-- Hero Section (Static content) -->
+  <section id="hero" class="h-screen bg-gradient-to-br from-green-400 to-blue-500 flex flex-col items-center justify-center text-white relative text-center">
+    <h1 class='font-bold text-4xl sm:text-6xl text-center text-white'>{t.hero.name}</h1>
+    <p class='text-lg opacity-70 text-center text-white'>{t.hero.title}</p>
+    <!-- ArrowDown Icon as SVG -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="absolute bottom-8 animate-bounce h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-16 text-center">{t.projects.title}</h2>
+      <!-- Main Projects Row -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[800px] mx-auto mb-8">
+        <ProjectCard
+          client:load
+          {...presusDataLocal}
+          lang={lang}
+          projectSlug="presus"
+          autoOpen={autoOpenProject === 'presus'}
+        ><PresusDescription client:load lang={lang} /></ProjectCard>
+        <ProjectCard
+          client:load
+          {...vationDataLocal}
+          lang={lang}
+          projectSlug="vation"
+          autoOpen={autoOpenProject === 'vation'}
+        ><VationDescription client:load lang={lang} /></ProjectCard>
+      </div>
+      
+      <!-- Other Projects Row -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[800px] mx-auto">
+        <ProjectCard
+          client:load
+          {...filmoDataLocal}
+          lang={lang}
+          projectSlug="filmo"
+          autoOpen={autoOpenProject === 'filmo'}
+        />
+        <ProjectCard
+          client:load
+          {...whatIfInvestmentsDataLocal}
+          lang={lang}
+          projectSlug="what-if-investments"
+          autoOpen={autoOpenProject === 'what-if-investments'}
+        />
+        <ProjectCard
+          client:load
+          {...zappariaLocal}
+          lang={lang}
+          projectSlug="zapparia"
+          autoOpen={autoOpenProject === 'zapparia'}
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section (Static content) -->
+  <AboutMe id="about" lang={lang} />
+
+  {/* Medium Posts Section */}
+  <MediumSection lang={lang} />
+
+  <footer class="py-6 bg-gray-100">
+    <div class="container mx-auto px-4 flex flex-col-reverse gap-2 sm:flex-row justify-between items-center text-sm text-gray-600">
+      <div>
+        <p>{t.footer.rights}</p>
+        <p class="flex items-center">
+          {t.footer.madeWith} <LuHeart className="h-4 w-4 mx-1 text-red-500" /> {t.footer.and}
+        </p>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="mailto:fbeccaria24@gmail.com">
+          <Button variant="ghost" size="icon" className='text-foreground hover:bg-slate-300'>
+            <LuMail className="h-5 w-5" />
+            <span class="sr-only">{t.footer.sendEmail}</span>
+          </Button>
+        </a>
+        <a href={lang === 'es' ? "/Francisco Beccaria - CV.pdf" : "/Francisco Beccaria - Resume.pdf"} target="_blank" rel="noopener noreferrer">
+          <Button variant="ghost" size="icon" className="text-foreground hover:bg-slate-300">
+            <FaRegFilePdf className="h-5 w-5" />
+            <span class="sr-only">{t.footer.resume}</span>
+          </Button>
+        </a>
+        <a href="https://github.com/franciscobeccaria" target="_blank" rel="noopener noreferrer">
+          <Button variant="ghost" size="icon" className='text-foreground hover:bg-slate-300'>
+            <LuGithub className="h-5 w-5" />
+            <span class="sr-only">{t.footer.github}</span>
+          </Button>
+        </a>
+        <a href="https://www.linkedin.com/in/franciscobeccaria" target="_blank" rel="noopener noreferrer">
+          <Button variant="ghost" size="icon" className="text-foreground hover:bg-slate-300">
+            <LuLinkedin className="h-5 w-5" />
+            <span class="sr-only">{t.footer.linkedin}</span>
+          </Button>
+        </a>
+        <a href="https://medium.com/@fbeccaria24" target="_blank" rel="noopener noreferrer">
+          <Button variant="ghost" size="icon" className="text-foreground hover:bg-slate-300">
+            <FaMedium className="h-5 w-5" />
+            <span class="sr-only">{t.footer.medium}</span>
+          </Button>
+        </a>
+      </div>
+    </div>
+  </footer>
+</main>
