@@ -16,6 +16,7 @@ export interface Translation {
     visitSite: string;
     seeRepository: string;
     openProjectOverview: string;
+    preview: string;
     filmo: ProjectDescription;
     vation: ProjectDescription;
     presus: ProjectDescription;
@@ -51,6 +52,19 @@ export interface Translation {
     github: string;
     linkedin: string;
     medium: string;
+  };
+  navigation: {
+    home: string;
+    backToHome: string;
+    backToPortfolio: string;
+    goBack: string;
+    previousProject: string;
+    nextProject: string;
+  };
+  errors: {
+    pageNotFound: string;
+    pageNotFoundDescription: string;
+    suggestedProjects: string;
   };
 }
 

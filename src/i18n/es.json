@@ -16,6 +16,7 @@
     "visitSite": "Visitar Sitio",
     "seeRepository": "Ver Repositorio",
     "openProjectOverview": "Ver Proyecto",
+    "preview": "Vista Previa",
     "filmo": {
       "generalDescription": "En esta app puedes buscar cualquier película o serie de TV. Puedes registrarte y crear listas personalizadas, como Mejores Películas de Siempre. También puedes usar las listas predeterminadas: Quiero Ver y Ya la Vi.",
       "techDescription": "La base de datos de películas/series de TV se extrae de la API TheMovieDB. La autenticación de usuarios es a través de Firebase. Y guardé las listas de usuarios en Firestore. En este proyecto usé React, React-Router, Redux, styled-components, axios, entre otras tecnologías o librerías."
@@ -66,5 +67,18 @@
     "github": "GitHub",
     "linkedin": "LinkedIn",
     "medium": "Medium"
+  },
+  "navigation": {
+    "home": "Inicio",
+    "backToHome": "Volver al Inicio",
+    "backToPortfolio": "Volver al Portafolio",
+    "goBack": "Volver",
+    "previousProject": "Proyecto Anterior",
+    "nextProject": "Siguiente Proyecto"
+  },
+  "errors": {
+    "pageNotFound": "Página No Encontrada",
+    "pageNotFoundDescription": "Lo siento, la página que buscas no existe. Pudo haber sido movida, eliminada, o ingresaste una URL incorrecta.",
+    "suggestedProjects": "Echa un vistazo a estos proyectos:"
   }
 }

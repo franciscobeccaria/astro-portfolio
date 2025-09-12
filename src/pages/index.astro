@@ -76,11 +76,15 @@ const t = await getTranslations(currentLang);
               client:load
               {...presusData}
               lang={currentLang}
+              useDirectLinks={true}
+              projectSlug="presus"
             ><PresusDescription client:load lang={currentLang} /></ProjectCard>
             <ProjectCard
               client:load
               {...vationData}
               lang={currentLang}
+              useDirectLinks={true}
+              projectSlug="vation"
             ><VationDescription client:load lang={currentLang} /></ProjectCard>
           </div>
           
@@ -90,16 +94,22 @@ const t = await getTranslations(currentLang);
               client:load
               {...filmoData}
               lang={currentLang}
+              useDirectLinks={true}
+              projectSlug="filmo"
             />
             <ProjectCard
               client:load
               {...whatIfInvestmentsData}
               lang={currentLang}
+              useDirectLinks={true}
+              projectSlug="what-if-investments"
             />
             <ProjectCard
               client:load
               {...zapparia}
               lang={currentLang}
+              useDirectLinks={true}
+              projectSlug="zapparia"
             />
           </div>
         </div>

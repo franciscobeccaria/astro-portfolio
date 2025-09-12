@@ -16,6 +16,7 @@
     "visitSite": "Visit Site",
     "seeRepository": "See Repository",
     "openProjectOverview": "Open Project Overview",
+    "preview": "Preview",
     "filmo": {
       "generalDescription": "On this app you can search any movie or tv show. You can sign up and create custom lists, like Best Movies Ever. Also, you can use the default lists: Want-To-See and Seen-It.",
       "techDescription": "The Movies/TV Shows database is extracted from TheMovieDB API. The user authentication is through Firebase. And I saved the users lists on Firestore. In this project I used React, React-Router, Redux, styled-components, axios, among others technologies or libraries."
@@ -66,5 +67,18 @@
     "github": "GitHub",
     "linkedin": "LinkedIn",
     "medium": "Medium"
+  },
+  "navigation": {
+    "home": "Home",
+    "backToHome": "Back to Home",
+    "backToPortfolio": "Back to Portfolio",
+    "goBack": "Go Back",
+    "previousProject": "Previous Project",
+    "nextProject": "Next Project"
+  },
+  "errors": {
+    "pageNotFound": "Page Not Found",
+    "pageNotFoundDescription": "Sorry, the page you're looking for doesn't exist. It might have been moved, deleted, or you entered the wrong URL.",
+    "suggestedProjects": "Check out these projects:"
   }
 }

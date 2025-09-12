@@ -84,6 +84,8 @@ interface ProjectCardProps {
   children?: ReactNode;
   className?: string;
   lang?: 'es' | 'en';
+  useDirectLinks?: boolean;
+  projectSlug?: string;
 }
 
 export default function ProjectCard({
@@ -99,6 +101,8 @@ export default function ProjectCard({
   children,
   className,
   lang = 'es',
+  useDirectLinks = false,
+  projectSlug,
 }: ProjectCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [translations, setTranslations] = useState<Translation | null>(null);
@@ -171,9 +175,18 @@ export default function ProjectCard({
     };
   }, [isModalOpen]);
 
+  const handleCardClick = () => {
+    if (useDirectLinks && projectSlug) {
+      const langPrefix = lang === 'es' ? '/es' : '';
+      window.location.href = `${langPrefix}/${projectSlug}`;
+    } else {
+      setIsModalOpen(true);
+    }
+  };
+
   return (
     <>
-      <div onClick={() => setIsModalOpen(true)} className={`relative h-52 rounded-lg overflow-hidden group cursor-pointer ${className || ""}`}>
+      <div onClick={handleCardClick} className={`relative h-52 rounded-lg overflow-hidden group cursor-pointer ${className || ""}`}>
         <img
           src={imageSrc}
           alt={title}
@@ -186,7 +199,10 @@ export default function ProjectCard({
             variant="gradientSecondary"
             className="w-full transition-all duration-300 ease-in-out transform group-hover:scale-105"
           >
-            {translations?.projects.openProjectOverview || "Open Project Overview"}
+            {useDirectLinks 
+              ? (translations?.projects.visitSite || "View Project")
+              : (translations?.projects.openProjectOverview || "Open Project Overview")
+            }
           </Button>
         </div>
       </div>
