@@ -18,8 +18,8 @@ if (!slug || !isValidSlug(slug)) {
 <html>
   <head>
     <script define:vars={{ projectSlug: slug }}>
-      // Set flag for modal to open automatically, then redirect to main page
-      window.shouldOpenModal = projectSlug;
+      // Set flag in sessionStorage for modal to open automatically, then redirect to main page
+      sessionStorage.setItem('shouldOpenModal', projectSlug);
       window.location.replace('/es/');
     </script>
   </head>
