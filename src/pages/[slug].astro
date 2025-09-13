@@ -1,4 +1,20 @@
 ---
+/**
+ * Dynamic Project Pages - English
+ * 
+ * Generates individual project pages (e.g., /presus, /vation) that:
+ * 1. Display the same content as the main page
+ * 2. Automatically open the project modal
+ * 3. Have optimized SEO meta tags for the specific project
+ * 4. Support clean, shareable URLs
+ * 
+ * This enables:
+ * - Direct access to projects via clean URLs
+ * - Proper SEO for individual projects  
+ * - Social media sharing with project-specific metadata
+ * - Browser bookmark functionality
+ */
+
 // Import global styles
 import '@/styles/globals.css'
 
@@ -24,13 +40,14 @@ if (!slug || !isValidSlug(slug)) {
 const currentLang = getCurrentLanguage(Astro.url);
 const t = await getTranslations(currentLang);
 
-// Import project data for SEO
+// Import project data for SEO meta tags
 import filmoDataEn from "@/data/projects/en/filmo.json"
 import whatIfInvestmentsDataEn from "@/data/projects/en/what-if-investments.json"
 import vationDataEn from "@/data/projects/en/vation.json"
 import presusDataEn from "@/data/projects/en/presus.json"
 import zappariaDataEn from "@/data/projects/en/zapparia.json"
 
+// Map project slugs to their data for meta tag generation
 const projectDataMap: Record<string, any> = {
   'filmo': filmoDataEn,
   'what-if-investments': whatIfInvestmentsDataEn,

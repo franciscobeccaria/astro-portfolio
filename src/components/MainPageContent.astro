@@ -1,4 +1,20 @@
 ---
+/**
+ * MainPageContent Component
+ * 
+ * Shared component that renders the main portfolio page content.
+ * Used by both the main index pages and individual project pages.
+ * 
+ * Props:
+ * - lang: Language ('es' | 'en')
+ * - autoOpenProject: Project slug to automatically open modal for (optional)
+ * 
+ * This component enables:
+ * - Code reuse between main pages and project pages
+ * - Consistent rendering across different URL patterns
+ * - Automatic modal opening for direct project URL access
+ */
+
 // Import React components
 import Header from '@/components/header'
 import ProjectCard from '@/components/project-card'
@@ -38,7 +54,7 @@ interface Props {
 const { lang, autoOpenProject } = Astro.props;
 const t = await getTranslations(lang);
 
-// Get language-specific data
+// Select language-specific project data
 const filmoDataLocal = lang === 'es' ? filmoDataEs : filmoData;
 const whatIfInvestmentsDataLocal = lang === 'es' ? whatIfInvestmentsDataEs : whatIfInvestmentsData;
 const vationDataLocal = lang === 'es' ? vationDataEs : vationData;

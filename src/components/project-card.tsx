@@ -2,7 +2,17 @@ import type { MouseEvent as ReactMouseEvent, ReactNode } from 'react';
 import type { IconType } from 'react-icons';
 import { useState, useRef, useEffect } from 'react';
 
-// No need for global window variable - using sessionStorage instead
+/**
+ * ProjectCard Component
+ * 
+ * Handles smooth client-side navigation and modal management for project pages.
+ * 
+ * Features:
+ * - Smooth modal opening without page redirects
+ * - Clean URL updates (/project-slug) while maintaining scroll position
+ * - Support for both direct URL access and navigation from main page
+ * - Browser back/forward button compatibility
+ */
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -116,16 +126,17 @@ export default function ProjectCard({
     getTranslations(lang).then(setTranslations);
   }, [lang]);
 
-  // Auto-open modal if autoOpen prop is true, or if navigated from client-side
+  // Handle modal auto-opening for both direct URL access and client-side navigation
   useEffect(() => {
     if (autoOpen) {
+      // Direct URL access: modal opens automatically (e.g., visiting /presus directly)
       setIsModalOpen(true);
     } else {
-      // Check if we should open modal from client-side navigation
+      // Client-side navigation: check if this component should open its modal
       const shouldOpenFromNavigation = sessionStorage.getItem('clientNavigatedTo');
       if (shouldOpenFromNavigation === projectSlug && projectSlug) {
         setIsModalOpen(true);
-        sessionStorage.removeItem('clientNavigatedTo');
+        sessionStorage.removeItem('clientNavigatedTo'); // Clean up flag
       }
     }
   }, [autoOpen, projectSlug]);
@@ -211,19 +222,19 @@ export default function ProjectCard({
 
   const handleCardClick = () => {
     if (autoOpen) {
-      // If we're already on a project page, just open the modal
+      // Already on project page, just open the modal
       setIsModalOpen(true);
     } else {
-      // If we're on the main page, use client-side navigation for smooth UX
+      // From main page: smooth client-side navigation
       if (projectSlug) {
-        // Store flag for the target page to know it should open modal
+        // Set flag for sessionStorage-based modal opening (backup mechanism)
         sessionStorage.setItem('clientNavigatedTo', projectSlug);
-        const newPath = lang === 'es' ? `/es/${projectSlug}` : `/${projectSlug}`;
         
-        // Use client-side navigation
+        // Update URL without page reload (maintains scroll position)
+        const newPath = lang === 'es' ? `/es/${projectSlug}` : `/${projectSlug}`;
         window.history.pushState({}, '', newPath);
         
-        // Trigger modal open immediately for current page
+        // Open modal immediately for smooth UX
         setIsModalOpen(true);
       }
     }
@@ -232,11 +243,11 @@ export default function ProjectCard({
   const handleModalClose = () => {
     setIsModalOpen(false);
     
-    // Navigate back to main page URL using client-side navigation
+    // Return to main page URL without page reload
     const basePath = lang === 'es' ? '/es/' : '/';
     window.history.pushState({}, '', basePath);
     
-    // Clear any navigation flags
+    // Clean up any navigation flags
     sessionStorage.removeItem('clientNavigatedTo');
   };
 

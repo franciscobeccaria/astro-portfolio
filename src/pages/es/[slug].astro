@@ -1,4 +1,16 @@
 ---
+/**
+ * Dynamic Project Pages - Spanish
+ * 
+ * Spanish version of individual project pages (e.g., /es/presus, /es/vation).
+ * Same functionality as English version but with Spanish language support.
+ * 
+ * Features:
+ * - Spanish language content and metadata
+ * - Fallback to English project data if Spanish version unavailable
+ * - Proper hreflang tags for SEO
+ */
+
 // Import global styles
 import '@/styles/globals.css'
 
@@ -24,13 +36,14 @@ if (!slug || !isValidSlug(slug)) {
 const currentLang = getCurrentLanguage(Astro.url);
 const t = await getTranslations(currentLang);
 
-// Import project data for SEO
+// Import Spanish project data for SEO meta tags
 import filmoDataEs from "@/data/projects/es/filmo.json"
 import whatIfInvestmentsDataEs from "@/data/projects/es/what-if-investments.json"
 import vationDataEs from "@/data/projects/es/vation.json"
 import presusDataEs from "@/data/projects/es/presus.json"
 import zappariaDataEs from "@/data/projects/es/zapparia.json"
 
+// Map project slugs to Spanish data for meta tag generation
 const projectDataMap: Record<string, any> = {
   'filmo': filmoDataEs,
   'what-if-investments': whatIfInvestmentsDataEs,
