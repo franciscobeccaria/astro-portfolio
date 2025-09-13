@@ -1,18 +1,6 @@
 import type { MouseEvent as ReactMouseEvent, ReactNode } from 'react';
 import type { IconType } from 'react-icons';
 import { useState, useRef, useEffect } from 'react';
-
-/**
- * ProjectCard Component
- * 
- * Handles smooth client-side navigation and modal management for project pages.
- * 
- * Features:
- * - Smooth modal opening without page redirects
- * - Clean URL updates (/project-slug) while maintaining scroll position
- * - Support for both direct URL access and navigation from main page
- * - Browser back/forward button compatibility
- */
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -121,45 +109,35 @@ export default function ProjectCard({
   const modalRef = useRef<HTMLDivElement | null>(null);
   const shouldUseColumns = technologies.length > 4;
 
-  // Load translations
   useEffect(() => {
     getTranslations(lang).then(setTranslations);
   }, [lang]);
 
-  // Handle modal auto-opening for both direct URL access and client-side navigation
   useEffect(() => {
     if (autoOpen) {
-      // Direct URL access: modal opens automatically (e.g., visiting /presus directly)
       setIsModalOpen(true);
     } else {
-      // Client-side navigation: check if this component should open its modal
       const shouldOpenFromNavigation = sessionStorage.getItem('clientNavigatedTo');
       if (shouldOpenFromNavigation === projectSlug && projectSlug) {
         setIsModalOpen(true);
-        sessionStorage.removeItem('clientNavigatedTo'); // Clean up flag
+        sessionStorage.removeItem('clientNavigatedTo');
       }
     }
   }, [autoOpen, projectSlug]);
 
-  // Handle browser back/forward buttons
   useEffect(() => {
     const handlePopState = () => {
+      const basePath = `${lang === 'es' ? '/es' : ''}/`;
       const currentPath = window.location.pathname;
-      const basePath = lang === 'es' ? '/es/' : '/';
-      
       if (currentPath === basePath || currentPath === basePath.slice(0, -1)) {
         setIsModalOpen(false);
       }
     };
 
     window.addEventListener('popstate', handlePopState);
-    
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-    };
+    return () => window.removeEventListener('popstate', handlePopState);
   }, [lang]);
 
-  // Get project-specific translations
   const getProjectTranslations = () => {
     if (!translations) return { generalDescription, techDescription };
     
@@ -222,32 +200,17 @@ export default function ProjectCard({
 
   const handleCardClick = () => {
     if (autoOpen) {
-      // Already on project page, just open the modal
       setIsModalOpen(true);
-    } else {
-      // From main page: smooth client-side navigation
-      if (projectSlug) {
-        // Set flag for sessionStorage-based modal opening (backup mechanism)
-        sessionStorage.setItem('clientNavigatedTo', projectSlug);
-        
-        // Update URL without page reload (maintains scroll position)
-        const newPath = lang === 'es' ? `/es/${projectSlug}` : `/${projectSlug}`;
-        window.history.pushState({}, '', newPath);
-        
-        // Open modal immediately for smooth UX
-        setIsModalOpen(true);
-      }
+    } else if (projectSlug) {
+      sessionStorage.setItem('clientNavigatedTo', projectSlug);
+      window.history.pushState({}, '', `${lang === 'es' ? '/es' : ''}/${projectSlug}`);
+      setIsModalOpen(true);
     }
   };
 
   const handleModalClose = () => {
     setIsModalOpen(false);
-    
-    // Return to main page URL without page reload
-    const basePath = lang === 'es' ? '/es/' : '/';
-    window.history.pushState({}, '', basePath);
-    
-    // Clean up any navigation flags
+    window.history.pushState({}, '', `${lang === 'es' ? '/es' : ''}/`);
     sessionStorage.removeItem('clientNavigatedTo');
   };
 

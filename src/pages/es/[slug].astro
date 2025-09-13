@@ -1,23 +1,7 @@
 ---
-/**
- * Dynamic Project Pages - Spanish
- * 
- * Spanish version of individual project pages (e.g., /es/presus, /es/vation).
- * Same functionality as English version but with Spanish language support.
- * 
- * Features:
- * - Spanish language content and metadata
- * - Fallback to English project data if Spanish version unavailable
- * - Proper hreflang tags for SEO
- */
-
-// Import global styles
 import '@/styles/globals.css'
-
 import { PROJECT_SLUGS, isValidSlug } from '@/utils/projects'
 import MainPageContent from '@/components/MainPageContent.astro';
-
-// Import i18n utils
 import { getTranslations, getCurrentLanguage } from '@/i18n/utils';
 
 export async function getStaticPaths() {
@@ -28,7 +12,6 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params
 
-// Validate slug - if invalid, redirect to 404
 if (!slug || !isValidSlug(slug)) {
   return Astro.redirect('/404')
 }
@@ -36,14 +19,12 @@ if (!slug || !isValidSlug(slug)) {
 const currentLang = getCurrentLanguage(Astro.url);
 const t = await getTranslations(currentLang);
 
-// Import Spanish project data for SEO meta tags
 import filmoDataEs from "@/data/projects/es/filmo.json"
 import whatIfInvestmentsDataEs from "@/data/projects/es/what-if-investments.json"
 import vationDataEs from "@/data/projects/es/vation.json"
 import presusDataEs from "@/data/projects/es/presus.json"
 import zappariaDataEs from "@/data/projects/es/zapparia.json"
 
-// Map project slugs to Spanish data for meta tag generation
 const projectDataMap: Record<string, any> = {
   'filmo': filmoDataEs,
   'what-if-investments': whatIfInvestmentsDataEs,

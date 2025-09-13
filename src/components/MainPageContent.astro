@@ -1,49 +1,23 @@
 ---
-/**
- * MainPageContent Component
- * 
- * Shared component that renders the main portfolio page content.
- * Used by both the main index pages and individual project pages.
- * 
- * Props:
- * - lang: Language ('es' | 'en')
- * - autoOpenProject: Project slug to automatically open modal for (optional)
- * 
- * This component enables:
- * - Code reuse between main pages and project pages
- * - Consistent rendering across different URL patterns
- * - Automatic modal opening for direct project URL access
- */
-
-// Import React components
 import Header from '@/components/header'
 import ProjectCard from '@/components/project-card'
 import AboutMe from '@/components/about-me.astro'
-
 import { LuLinkedin, LuGithub, LuHeart, LuMail } from 'react-icons/lu';
 import { FaRegFilePdf, FaMedium } from 'react-icons/fa6';
-
 import {Button} from "@/components/ui/button"
 import VationDescription from "@/components/vation-description"
 import PresusDescription from "@/components/presus-description"
-
-// Import static data
 import filmoData from "@/data/projects/en/filmo.json"
 import whatIfInvestmentsData from "@/data/projects/en/what-if-investments.json"
 import vationData from "@/data/projects/en/vation.json"
 import presusData from "@/data/projects/en/presus.json"
 import zapparia from "@/data/projects/en/zapparia.json"
-
-// Import Spanish project data
 import filmoDataEs from "@/data/projects/es/filmo.json"
 import whatIfInvestmentsDataEs from "@/data/projects/es/what-if-investments.json"
 import vationDataEs from "@/data/projects/es/vation.json"
 import presusDataEs from "@/data/projects/es/presus.json"
 import zappariaEs from "@/data/projects/es/zapparia.json"
-
 import MediumSection from '@/components/medium-section';
-
-// Import i18n utils
 import { getTranslations, getCurrentLanguage } from '@/i18n/utils';
 
 interface Props {
@@ -54,7 +28,6 @@ interface Props {
 const { lang, autoOpenProject } = Astro.props;
 const t = await getTranslations(lang);
 
-// Select language-specific project data
 const filmoDataLocal = lang === 'es' ? filmoDataEs : filmoData;
 const whatIfInvestmentsDataLocal = lang === 'es' ? whatIfInvestmentsDataEs : whatIfInvestmentsData;
 const vationDataLocal = lang === 'es' ? vationDataEs : vationData;
@@ -62,25 +35,18 @@ const presusDataLocal = lang === 'es' ? presusDataEs : presusData;
 const zappariaLocal = lang === 'es' ? zappariaEs : zapparia;
 ---
 
-<!-- Header (React component with interactivity) -->
 <Header client:load lang={lang} />
-
 <main>
-  <!-- Hero Section (Static content) -->
   <section id="hero" class="h-screen bg-gradient-to-br from-green-400 to-blue-500 flex flex-col items-center justify-center text-white relative text-center">
-    <h1 class='font-bold text-4xl sm:text-6xl text-center text-white'>{t.hero.name}</h1>
-    <p class='text-lg opacity-70 text-center text-white'>{t.hero.title}</p>
-    <!-- ArrowDown Icon as SVG -->
+    <h1 class="font-bold text-4xl sm:text-6xl text-center text-white">{t.hero.name}</h1>
+    <p class="text-lg opacity-70 text-center text-white">{t.hero.title}</p>
     <svg xmlns="http://www.w3.org/2000/svg" class="absolute bottom-8 animate-bounce h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
     </svg>
   </section>
-
-  <!-- Projects Section -->
   <section id="projects" class="py-20 bg-white">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl font-bold mb-16 text-center">{t.projects.title}</h2>
-      <!-- Main Projects Row -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[800px] mx-auto mb-8">
         <ProjectCard
           client:load
