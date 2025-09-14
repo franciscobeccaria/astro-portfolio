@@ -114,7 +114,7 @@ export default function ProjectCard({
     getTranslations(lang).then(setTranslations);
   }, [lang]);
 
-  // Auto-abrir modal (acceso directo a URL)
+  // Auto-open modal (direct URL access)
   useEffect(() => {
     if (autoOpen) {
       setIsModalOpen(true);
@@ -127,7 +127,7 @@ export default function ProjectCard({
     }
   }, [autoOpen, projectSlug]);
 
-  // Manejo botones back/forward del navegador
+  // Handle browser back/forward buttons
   useEffect(() => {
     const handlePopState = () => {
       const basePath = `${lang === 'es' ? '/es' : ''}/`;
@@ -201,7 +201,7 @@ export default function ProjectCard({
     };
   }, [isModalOpen]);
 
-  // Navegación client-side suave
+  // Smooth client-side navigation
   const handleCardClick = () => {
     if (autoOpen) {
       setIsModalOpen(true);
@@ -212,7 +212,7 @@ export default function ProjectCard({
     }
   };
 
-  // Cerrar modal y actualizar URL
+  // Close modal and update URL
   const handleModalClose = () => {
     setIsModalOpen(false);
     window.history.pushState({}, '', `${lang === 'es' ? '/es' : ''}/`);
