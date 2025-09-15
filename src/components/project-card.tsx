@@ -11,6 +11,12 @@ import { SiStyledcomponents, SiNextdotjs, SiGraphql, SiTailwindcss, SiReact, SiR
 import { ZustandIcon, ShadcnIcon } from './CustomIcons';
 import { getTranslations } from '@/i18n/utils';
 import type { Translation } from '@/i18n/types';
+import { 
+  getProjectSlugFromURL, 
+  updateURLWithProject, 
+  setupProjectHistoryHandler,
+  type ProjectSlug 
+} from '@/utils/projects';
 
 const iconMap: { [key: string]: IconType } = {
   "react": SiReact,
@@ -84,6 +90,8 @@ interface ProjectCardProps {
   children?: ReactNode;
   className?: string;
   lang?: 'es' | 'en';
+  projectSlug?: ProjectSlug;
+  autoOpen?: boolean;
 }
 
 export default function ProjectCard({
@@ -99,6 +107,8 @@ export default function ProjectCard({
   children,
   className,
   lang = 'es',
+  projectSlug,
+  autoOpen = false,
 }: ProjectCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [translations, setTranslations] = useState<Translation | null>(null);
@@ -109,6 +119,33 @@ export default function ProjectCard({
   useEffect(() => {
     getTranslations(lang).then(setTranslations);
   }, [lang]);
+
+  // Auto-open modal on mount if autoOpen is true or if this project is in URL
+  useEffect(() => {
+    if (autoOpen) {
+      setIsModalOpen(true);
+    } else if (projectSlug) {
+      const urlSlug = getProjectSlugFromURL();
+      if (urlSlug === projectSlug) {
+        setIsModalOpen(true);
+      }
+    }
+  }, [autoOpen, projectSlug]);
+
+  // Setup browser history handler
+  useEffect(() => {
+    if (!projectSlug) return;
+
+    const cleanup = setupProjectHistoryHandler((urlSlug) => {
+      if (urlSlug === projectSlug) {
+        setIsModalOpen(true);
+      } else if (isModalOpen && urlSlug !== projectSlug) {
+        setIsModalOpen(false);
+      }
+    });
+
+    return cleanup;
+  }, [projectSlug, isModalOpen]);
 
   // Get project-specific translations
   const getProjectTranslations = () => {
@@ -132,7 +169,7 @@ export default function ProjectCard({
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-        setIsModalOpen(false);
+        handleModalClose();
       }
     };
   
@@ -160,7 +197,7 @@ export default function ProjectCard({
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && isModalOpen) {
-        setIsModalOpen(false);
+        handleModalClose();
       }
     };
 
@@ -171,9 +208,25 @@ export default function ProjectCard({
     };
   }, [isModalOpen]);
 
+  // Handle card click - open modal and update URL
+  const handleCardClick = () => {
+    setIsModalOpen(true);
+    if (projectSlug) {
+      updateURLWithProject(projectSlug);
+    }
+  };
+
+  // Handle modal close - close modal and update URL
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    if (projectSlug) {
+      updateURLWithProject(null);
+    }
+  };
+
   return (
     <>
-      <div onClick={() => setIsModalOpen(true)} className={`relative h-52 rounded-lg overflow-hidden group cursor-pointer ${className || ""}`}>
+      <div onClick={handleCardClick} className={`relative h-52 rounded-lg overflow-hidden group cursor-pointer ${className || ""}`}>
         <img
           src={imageSrc}
           alt={title}
@@ -199,7 +252,7 @@ export default function ProjectCard({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-start justify-center p-4"
-            onClick={() => setIsModalOpen(false)}
+            onClick={handleModalClose}
           >
             <motion.div
               ref={modalRef}
@@ -228,7 +281,7 @@ export default function ProjectCard({
                       )}
                       <h1 className="text-4xl font-bold">{title}</h1>
                     </div>
-                    <Button variant="ghost" size="icon" onClick={() => setIsModalOpen(false)}>
+                    <Button variant="ghost" size="icon" onClick={handleModalClose}>
                       <X className="h-6 w-6" />
                       <span className="sr-only">Close</span>
                     </Button>

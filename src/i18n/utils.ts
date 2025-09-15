@@ -16,8 +16,6 @@ export async function getLangFromUrl(url: URL): Promise<Languages> {
 
 export async function getTranslations(lang: Languages) {
   switch (lang) {
-    case 'en':
-      return (await import('./en.json')).default;
     case 'es':
       return (await import('./es.json')).default;
     case 'en':
