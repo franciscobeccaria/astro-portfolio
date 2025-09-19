@@ -84,6 +84,8 @@ interface ProjectCardProps {
   children?: ReactNode;
   className?: string;
   lang?: 'es' | 'en';
+  autoOpen?: boolean;
+  projectSlug?: string;
 }
 
 export default function ProjectCard({
@@ -99,6 +101,8 @@ export default function ProjectCard({
   children,
   className,
   lang = 'es',
+  autoOpen = false,
+  projectSlug,
 }: ProjectCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [translations, setTranslations] = useState<Translation | null>(null);
@@ -108,6 +112,32 @@ export default function ProjectCard({
   // Load translations
   useEffect(() => {
     getTranslations(lang).then(setTranslations);
+  }, [lang]);
+
+  // Auto-open modal (direct URL access)
+  useEffect(() => {
+    if (autoOpen) {
+      setIsModalOpen(true);
+    } else {
+      const flag = sessionStorage.getItem('clientNavigatedTo');
+      if (flag === projectSlug && projectSlug) {
+        setIsModalOpen(true);
+        sessionStorage.removeItem('clientNavigatedTo');
+      }
+    }
+  }, [autoOpen, projectSlug]);
+
+  // Handle browser back/forward buttons
+  useEffect(() => {
+    const handlePopState = () => {
+      const basePath = `${lang === 'es' ? '/es' : ''}/`;
+      const currentPath = window.location.pathname;
+      if (currentPath === basePath || currentPath === basePath.slice(0, -1)) {
+        setIsModalOpen(false);
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
   }, [lang]);
 
   // Get project-specific translations
@@ -171,9 +201,27 @@ export default function ProjectCard({
     };
   }, [isModalOpen]);
 
+  // Smooth client-side navigation
+  const handleCardClick = () => {
+    if (autoOpen) {
+      setIsModalOpen(true);
+    } else if (projectSlug) {
+      sessionStorage.setItem('clientNavigatedTo', projectSlug);
+      window.history.pushState({}, '', `${lang === 'es' ? '/es' : ''}/${projectSlug}`);
+      setIsModalOpen(true);
+    }
+  };
+
+  // Close modal and update URL
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    window.history.pushState({}, '', `${lang === 'es' ? '/es' : ''}/`);
+    sessionStorage.removeItem('clientNavigatedTo');
+  };
+
   return (
     <>
-      <div onClick={() => setIsModalOpen(true)} className={`relative h-52 rounded-lg overflow-hidden group cursor-pointer ${className || ""}`}>
+      <div onClick={handleCardClick} className={`relative h-52 rounded-lg overflow-hidden group cursor-pointer ${className || ""}`}>
         <img
           src={imageSrc}
           alt={title}
@@ -199,7 +247,7 @@ export default function ProjectCard({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-start justify-center p-4"
-            onClick={() => setIsModalOpen(false)}
+            onClick={handleModalClose}
           >
             <motion.div
               ref={modalRef}
@@ -228,7 +276,7 @@ export default function ProjectCard({
                       )}
                       <h1 className="text-4xl font-bold">{title}</h1>
                     </div>
-                    <Button variant="ghost" size="icon" onClick={() => setIsModalOpen(false)}>
+                    <Button variant="ghost" size="icon" onClick={handleModalClose}>
                       <X className="h-6 w-6" />
                       <span className="sr-only">Close</span>
                     </Button>
